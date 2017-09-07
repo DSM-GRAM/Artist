@@ -33,7 +33,7 @@ def before_first_request():
     logger = make_logger()
     # 로거 set
 
-    logger.info('-------- Logger started')
+    logger.info('-------- Logger started --------')
 
 
 @app.before_request
@@ -59,11 +59,6 @@ def teardown_request(exception):
 @app.teardown_appcontext
 def teardown_appcontext(exception):
     logger.info('---- Teardown appcontext')
-
-
-@app.route('/', methods=['POST'])
-def index():
-    return 'hello'
 
 
 if __name__ == '__main__':
