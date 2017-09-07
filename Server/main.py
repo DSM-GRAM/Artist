@@ -11,6 +11,12 @@ api = Api(app)
 logger = None
 
 
+def add_resources():
+    from routes.api.user.score import Score
+
+    api.add_resource(Score, '/score')
+
+
 @app.before_first_request
 def before_first_request():
     def make_handler():
@@ -62,4 +68,5 @@ def teardown_appcontext(exception):
 
 
 if __name__ == '__main__':
+    add_resources()
     app.run(debug=debug)
