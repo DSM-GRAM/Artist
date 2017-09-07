@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_restful import Api
 
+import logging
+from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__)
 api = Api(app)
@@ -10,7 +12,14 @@ debug = True
 
 @app.before_first_request
 def before_first_request():
-    pass
+    handler = RotatingFileHandler('server_log.log', maxBytes=100000, backupCount=5)
+    handler.setLevel(logging.DEBUG if debug else logging.INFO)
+
+    formatter = logging.Formatter("[%(asctime)s] %(levelname)s - %(message)s")
+    handler.setFormatter(formatter)
+
+    app.logger.addHandler(handler)
+    app.logger.info('Logger started')
 
 
 @app.before_request
