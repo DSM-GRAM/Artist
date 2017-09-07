@@ -5,9 +5,9 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__)
-api = Api(app)
-
 debug = True
+
+api = Api(app)
 logger = None
 
 
