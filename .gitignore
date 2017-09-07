@@ -159,3 +159,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Pycharm
+Server/.idea/workspace.xml
