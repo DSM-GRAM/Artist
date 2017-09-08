@@ -14,12 +14,14 @@ logger = None
 def add_resources():
     from routes.api.user.user import User
     from routes.api.leaderboard.leaderboard import Rank
-    from routes.api.paint.paint import ImageData, Sample
+    from routes.api.image.image import ImageData, Sample, Compare
 
     api.add_resource(User, '/user')
     api.add_resource(Rank, '/rank')
+
     api.add_resource(ImageData, '/image-data')
     api.add_resource(Sample, '/sample-image/<uri>')
+    api.add_resource(Compare, '/compare/<uri>')
 
 
 @app.before_first_request

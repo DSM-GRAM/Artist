@@ -1,3 +1,5 @@
+# 사용자에 대한 데이터를 관리합니다
+
 from flask import request
 from flask_restful import Resource
 from database.models.user import *
@@ -10,10 +12,15 @@ class User(Resource):
         name = request.form['name']
         affiliation = request.form['affiliation']
         age = request.form['age']
+        category = request.form['category']
         score = request.form['score']
 
-        if add_new_score(phone, name, affiliation, age, score):
-            # leaderboard 쪽으로 푸쉬 보내야 함
-            return '', 201
-        else:
-            return '', 204
+        add_new_score(phone, name, affiliation, age, category, score)
+
+        img = request.files['img']
+        # 사용자의 이미지 처리
+        img.save('./user_images/{0}.png'.format(phone))
+
+        # leaderboard 쪽으로 푸쉬 보내야 함
+
+        return '', 201

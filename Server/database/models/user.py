@@ -2,12 +2,13 @@ from database.mongodb import user_col
 import pymongo
 
 
-def add_new_score(phone, name, affiliation, age, score):
+def add_new_score(phone, name, affiliation, age, category, score):
     data = {
         'phone': phone,
         'name': name,
         'affiliation': affiliation,
         'age': int(age),
+        'category': int(category),
         'score': int(score)
     }
 

@@ -18,5 +18,5 @@ def insert_new_image(category):
     return data
 
 
-def get_image_info(uri):
+def get_uri_info(uri):
     return dict(image_queue_col.find_one({'uri': uri}, {'_id': False}))
