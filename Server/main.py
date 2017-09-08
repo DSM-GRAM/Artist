@@ -5,16 +5,21 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__)
-debug = True
+debug = False
 
 api = Api(app)
 logger = None
 
 
 def add_resources():
-    from routes.api.user.score import Score
+    from routes.api.user.user import User
+    from routes.api.leaderboard.leaderboard import Rank
+    from routes.api.paint.paint import ImageData, Sample
 
-    api.add_resource(Score, '/score')
+    api.add_resource(User, '/user')
+    api.add_resource(Rank, '/rank')
+    api.add_resource(ImageData, '/image-data')
+    api.add_resource(Sample, '/sample-image/<uri>')
 
 
 @app.before_first_request
@@ -51,7 +56,6 @@ def before_request():
 @app.after_request
 def after_request(response):
     # flask.wrapper.Response 클래스의 인스턴스
-    logger.info('Response data : {0}'.format(response.data))
     logger.info('Response status : {0}'.format(response.status))
 
     return response
