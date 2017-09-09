@@ -34,12 +34,12 @@ class Sample(Resource):
 
 
 class Compare(Resource):
-    def post(self, uri):
+    def post(self):
         # 유사도 측정
-        # 클라이언트 측은 form-data로 데이터와 파일을 같이 보낼 수 있으니 사용자 정의 URI를 하지 않아도 될듯
         user_img = request.files['img']
 
-        uri_info = get_uri_info(uri)
-        category = uri_info['category']
-        image_num = uri_info['image_num']
-        pass
+        category = int(request.form['category'])
+        image_num = int(request.form['image_num'])
+        origin_img = open('{0}/{1}.png'.format(image_dirs[category], image_num))
+
+        return '', 201

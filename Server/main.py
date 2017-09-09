@@ -23,7 +23,7 @@ def add_resources():
 
     api.add_resource(ImageData, '/image-data')
     api.add_resource(Sample, '/sample-image/<uri>')
-    api.add_resource(Compare, '/compare/<uri>')
+    api.add_resource(Compare, '/compare')
 
 
 @app.before_first_request
