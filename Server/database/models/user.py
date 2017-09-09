@@ -20,3 +20,11 @@ def add_new_score(phone, name, affiliation, age, category, score):
 
 def get_user_data_list():
     return list(user_col.find({}, {'_id': False}).sort('score', pymongo.DESCENDING))
+
+
+def get_category_counts():
+    data = {}
+    for i in range(1, 11):
+        data[i] = user_col.find({'category': i}).count()
+
+    return data

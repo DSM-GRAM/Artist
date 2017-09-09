@@ -24,3 +24,9 @@ class User(Resource):
         # leaderboard 쪽으로 푸쉬 보내야 함
 
         return '', 201
+
+
+class CategoryCount(Resource):
+    def post(self):
+        # 카테고리 카운트
+        return get_category_counts()
