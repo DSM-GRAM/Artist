@@ -30,9 +30,3 @@ class CategoryCount(Resource):
     def post(self):
         # 카테고리 카운트
         return get_category_counts()
-
-
-class UserImage(Resource):
-    def get(self):
-        # 특정 사용자의 이미지 조회
-        return send_from_directory('./user_images', '{0}.png'.format(request.form['phone']))
