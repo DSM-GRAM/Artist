@@ -1,4 +1,4 @@
-# 이미지에 대한 로직을 수행합니다.
+# 이미지에 대한 로직을 수행합니다. 사용자의 데이터는 일체 관리하지 않습니다.
 
 from flask import request, send_from_directory
 from flask_restful import Resource
