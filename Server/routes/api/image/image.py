@@ -30,7 +30,7 @@ class Sample(Resource):
     def get(self, uri):
         # 접속 시 샘플 그림 전송
         uri_info = get_uri_info(uri)
-        return send_from_directory(image_dirs[uri_info['category']], '{0}.PNG'.format(uri_info['image_num']))
+        return send_from_directory(image_dirs[uri_info['category']], f"{uri_info['image_num']}.PNG")
 
 
 class Compare(Resource):
@@ -40,6 +40,6 @@ class Compare(Resource):
 
         category = int(request.form['category'])
         image_num = int(request.form['image_num'])
-        origin_img = open('{0}/{1}.png'.format(image_dirs[category], image_num))
+        origin_img = open(f'{image_dirs[category]}/{image_num}.png')
 
         return '', 201
