@@ -5,10 +5,25 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__)
-debug = True
+debug = False
 
 api = Api(app)
 logger = None
+
+
+def add_resources():
+    from routes.api.user.user import User, CategoryCount
+    from routes.api.leaderboard.leaderboard import Rank
+    from routes.api.image.image import ImageData, Sample, Compare
+
+    api.add_resource(User, '/user')
+    api.add_resource(CategoryCount, '/category-count')
+
+    api.add_resource(Rank, '/rank')
+
+    api.add_resource(ImageData, '/image-data')
+    api.add_resource(Sample, '/sample-image/<uri>')
+    api.add_resource(Compare, '/compare')
 
 
 @app.before_first_request
@@ -33,7 +48,7 @@ def before_first_request():
     logger = make_logger()
     # 로거 set
 
-    logger.info('-------- Logger started')
+    logger.info('-------- Logger started --------')
 
 
 @app.before_request
@@ -45,7 +60,6 @@ def before_request():
 @app.after_request
 def after_request(response):
     # flask.wrapper.Response 클래스의 인스턴스
-    logger.info('Response data : {0}'.format(response.data))
     logger.info('Response status : {0}'.format(response.status))
 
     return response
@@ -61,10 +75,6 @@ def teardown_appcontext(exception):
     logger.info('---- Teardown appcontext')
 
 
-@app.route('/', methods=['POST'])
-def index():
-    return 'hello'
-
-
 if __name__ == '__main__':
+    add_resources()
     app.run(debug=debug)
