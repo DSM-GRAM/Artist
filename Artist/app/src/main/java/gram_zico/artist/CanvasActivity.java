@@ -1,9 +1,8 @@
 package gram_zico.artist;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class CanvasActivity extends AppCompatActivity {
+public class CanvasActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
