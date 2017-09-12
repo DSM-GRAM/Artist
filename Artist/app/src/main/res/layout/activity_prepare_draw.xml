@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:background="@drawable/background_prepare"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="앞에 있는 그림을 확인하세요"
+            android:textSize="24dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:textColor="#FFFFFF"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_centerInParent="true"
+            android:rotation="315"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:src="@drawable/icon_brush"/>
+
+        <TextView
+            android:layout_below="@id/imageView"
+            android:layout_marginTop="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:text="인물"
+            android:layout_centerHorizontal="true"
+            android:textSize="42dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <Button
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="그리기 시작"
+            android:textSize="18dp"
+            android:textColor="@color/colorPurple"
+            android:background="@android:color/transparent"/>
+    </RelativeLayout>
+</LinearLayout>

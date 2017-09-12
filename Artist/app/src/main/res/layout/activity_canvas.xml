@@ -18,20 +18,23 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/clearButton"
+            app:backgroundTint="#B1B1B1"
             android:layout_alignParentBottom="true"
             android:layout_margin="8dp"
             android:layout_width="64dp"
             android:layout_height="64dp" />
 
         <android.support.design.widget.FloatingActionButton
+            android:id="@+id/showSeekButton"
             android:layout_toRightOf="@id/clearButton"
             android:layout_alignParentBottom="true"
+            app:backgroundTint="#B1B1B1"
             android:layout_margin="8dp"
             android:layout_width="64dp"
             android:layout_height="64dp" />
 
         <LinearLayout
-            android:visibility="invisible"
+            android:id="@+id/seekLayout"
             android:layout_margin="8dp"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@id/clearButton"
@@ -49,6 +52,7 @@
                 android:layout_height="10dp"/>
 
             <SeekBar
+                android:id="@+id/seekBar"
                 android:layout_gravity="center"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -64,11 +68,12 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:background="#B8B8B8"
+        android:background="#88B8B8B8"
         android:layout_width="match_parent"
         android:layout_height="112dp">
 
         <LinearLayout
+            android:id="@+id/colorSelectLayout1"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_width="match_parent"
@@ -76,6 +81,7 @@
             android:layout_weight="1"/>
 
         <LinearLayout
+            android:id="@+id/colorSelectLayout2"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_width="match_parent"

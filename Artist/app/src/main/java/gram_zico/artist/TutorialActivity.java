@@ -20,13 +20,18 @@ public class TutorialActivity extends BaseActivity {
         ViewPager viewPager = (ViewPager)findViewById(R.id.viewPager);
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.topView);
 
-        setCountCircle(linearLayout);
+        setCountCircle(linearLayout, 2);
     }
 
-    private void setCountCircle(LinearLayout linearLayout){
+    private void setCountCircle(LinearLayout linearLayout, int select){
+        linearLayout.removeAllViews();
         for(int i=0; i<5; i++){
             View view = new View(this);
-            view.setBackgroundResource(R.drawable.tutorial_select_view_shape);
+            if(i == select){
+                view.setBackgroundResource(R.drawable.tutorial_select_view_shape);
+            }else{
+                view.setBackgroundResource(R.drawable.tutorial_unselect_view_shape);
+            }
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(32,32);
             params.setMargins(16,16,0,0);
             linearLayout.addView(view, params);
