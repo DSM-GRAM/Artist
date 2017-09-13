@@ -26,7 +26,8 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:design:26.+'
-//    compile 'com.squareup.retrofit2:retrofit:2.3.0' 
-//    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    compile 'com.larswerkman:HoloColorPicker:1.5'
+
     testCompile 'junit:junit:4.12'
 }

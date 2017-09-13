@@ -1,4 +1,4 @@
-package gram_zico.artist;
+package gram_zico.artist.Activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,6 +6,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import gram_zico.artist.Adapter.CategoryAdapter;
+import gram_zico.artist.BaseActivity;
+import gram_zico.artist.R;
 
 /**
  * Created by root1 on 2017. 9. 11..
