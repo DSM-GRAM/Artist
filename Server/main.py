@@ -14,7 +14,7 @@ logger = None
 def add_resources():
     from routes.api.user.user import User, CategoryCount
     from routes.api.leaderboard.leaderboard import Rank, UserImage
-    from routes.api.image.image import ImageData, Sample, Compare
+    from routes.api.image.image import Sample, Compare
 
     # user package
     api.add_resource(User, '/user')
@@ -22,12 +22,11 @@ def add_resources():
 
     # rank package
     api.add_resource(Rank, '/rank')
-    api.add_resource(UserImage, '/user-image')
+    api.add_resource(UserImage, '/user-image/<phone>')
 
     # image package
-    api.add_resource(ImageData, '/image-data')
-    api.add_resource(Sample, '/sample-image/<uri>')
-    api.add_resource(Compare, '/compare')
+    api.add_resource(Sample, '/sample-image/<phone>')
+    api.add_resource(Compare, '/compare/<phone>')
 
 
 @app.before_first_request

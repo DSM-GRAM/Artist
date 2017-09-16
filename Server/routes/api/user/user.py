@@ -17,9 +17,9 @@ class User(Resource):
 
         add_new_score(phone, name, affiliation, age, category, score)
 
-        img = request.files['img']
-        # 사용자의 이미지 처리
-        img.save(f'./user_images/{phone}.png')
+        # img = request.files['img']
+        # # 사용자의 이미지 처리
+        # img.save(f'./user_images/{phone}.png')
 
         # leaderboard 쪽으로 푸쉬 보내야 함
 
@@ -27,6 +27,6 @@ class User(Resource):
 
 
 class CategoryCount(Resource):
-    def post(self):
+    def get(self):
         # 카테고리 카운트
         return get_category_counts()
