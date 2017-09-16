@@ -7,7 +7,11 @@ from database.models.user import *
 
 class Rank(Resource):
     def get(self):
-        return get_user_data_list()
+        user_data = get_user_data_list()
+        if user_data:
+            return user_data, 200
+        else:
+            return '', 204
 
 
 class UserImage(Resource):
