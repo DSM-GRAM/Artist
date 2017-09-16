@@ -13,17 +13,20 @@ logger = None
 
 def add_resources():
     from routes.api.user.user import User, CategoryCount
-    from routes.api.leaderboard.leaderboard import Rank
-    from routes.api.image.image import ImageData, Sample, Compare
+    from routes.api.leaderboard.leaderboard import Rank, UserImage
+    from routes.api.image.image import Sample, Compare
 
+    # user package
     api.add_resource(User, '/user')
     api.add_resource(CategoryCount, '/category-count')
 
+    # rank package
     api.add_resource(Rank, '/rank')
+    api.add_resource(UserImage, '/user-image/<phone>')
 
-    api.add_resource(ImageData, '/image-data')
-    api.add_resource(Sample, '/sample-image/<uri>')
-    api.add_resource(Compare, '/compare')
+    # image package
+    api.add_resource(Sample, '/sample-image/<phone>')
+    api.add_resource(Compare, '/compare/<phone>')
 
 
 @app.before_first_request
@@ -53,14 +56,14 @@ def before_first_request():
 
 @app.before_request
 def before_request():
-    logger.info('Requested from {0} [ {1} {2} ]'.format(request.host, request.method, request.url))
-    logger.info('Request data : {0}'.format(request.form))
+    logger.info(f'Requested from {request.host} [ {request.method} {request.url} ]')
+    logger.info(f'Request data : {request.form}')
 
 
 @app.after_request
 def after_request(response):
     # flask.wrapper.Response 클래스의 인스턴스
-    logger.info('Response status : {0}'.format(response.status))
+    logger.info(f'Response status : {response.status}')
 
     return response
 

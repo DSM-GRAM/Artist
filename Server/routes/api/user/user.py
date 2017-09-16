@@ -1,6 +1,6 @@
 # 사용자에 대한 데이터를 관리합니다
 
-from flask import request
+from flask import request, send_from_directory
 from flask_restful import Resource
 from database.models.user import *
 
@@ -19,7 +19,7 @@ class User(Resource):
 
         img = request.files['img']
         # 사용자의 이미지 처리
-        img.save('./user_images/{0}.png'.format(phone))
+        img.save(f'./user_images/{phone}.png')
 
         # leaderboard 쪽으로 푸쉬 보내야 함
 
@@ -27,6 +27,6 @@ class User(Resource):
 
 
 class CategoryCount(Resource):
-    def post(self):
+    def get(self):
         # 카테고리 카운트
         return get_category_counts()
