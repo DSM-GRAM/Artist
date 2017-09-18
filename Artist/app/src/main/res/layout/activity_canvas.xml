@@ -13,8 +13,10 @@
         android:layout_weight="1">
 
         <View
+            class="gram_zico.artist.Paper"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:id="@+id/paper"/>
 
         <android.support.design.widget.FloatingActionButton
             android:elevation="2dp"
