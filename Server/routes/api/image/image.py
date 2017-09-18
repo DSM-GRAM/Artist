@@ -25,8 +25,9 @@ class ChooseSample(Resource):
     def post(self):
         # 2. 샘플 그림 선정과 동적 URI 생성
         category = request.form.get('category', 0, int)
-        push(get_devices_by_type(2), {'message': 'sample'})
-        return {'_id': str(choose_new_sample(category))}
+        _id = str(choose_new_sample(category))
+        push(get_devices_by_type(2), {'message': 'sample', '_id': _id})
+        return {'_id': _id}, 201
 
 
 class Sample(Resource):
