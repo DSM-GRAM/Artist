@@ -30,7 +30,7 @@ def add_resources():
 
     # image package
     api.add_resource(ChooseSample, '/new-sample')
-    api.add_resource(Sample, '/sample-image/<_id>')
+    api.add_resource(Sample, '/sample/<_id>')
     api.add_resource(StartDraw, '/start-draw/<_id>')
     api.add_resource(Compare, '/compare/<_id>')
 

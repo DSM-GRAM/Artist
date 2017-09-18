@@ -13,3 +13,5 @@ class Device(Resource):
         # 2 = shower
         # 3 = leaderboard
         add_device(_type, registration_id)
+
+        return '', 201
