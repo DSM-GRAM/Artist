@@ -1,6 +1,6 @@
 # 리더보드를 위한 데이터를 관리합니다
 
-from flask import request, send_from_directory
+from flask import send_from_directory
 from flask_restful import Resource
 from database.models.user import *
 
