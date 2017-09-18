@@ -16,75 +16,71 @@ import android.view.View;
  */
 
 public class DrawView extends View {
-    View paper;
+
+    private Paint paint = new Paint();//그림 그리기 버튼
+    private Path path = new Path();
+
+    private int color = Color.BLACK;
+    private int width = 10;
+
+    float y ;//그림 그리는 좌표 설정
+    float x ;
+
+    private Paint.Style style;
+
     public DrawView(Context context) {
         super(context);
-        paper=findViewById(R.id.paper);
     }
 
-    class Paper extends View {
+    public DrawView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-        Paint paint = new Paint();//그림 그리기 버튼
-        Path path = new Path();
+    public void changeColor(int color){
+        this.color = color;
+    }
 
-        float y ;//그림 그리는 좌표 설정
-        float x ;
-        private float strokeWidth;
-        private Paint.Style style;
+    public void changeWidth(int size){
+        this.width = size;
+    }
 
-        public Paper(Context context) {
-            super(context);
+
+
+
+    protected void onDraw(Canvas canvas) {
+        paint.setStrokeWidth(width);
+        paint.setAntiAlias(true);
+        paint.setColor(color);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setDither(true);
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStrokeCap(Paint.Cap.ROUND);
+        canvas.drawPath(path, paint);
+
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        x = event.getX();
+        y = event.getY();
+
+        switch(event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                path.moveTo(x, y);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                x = event.getX();
+                y = event.getY();
+                path.lineTo(x, y);
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
         }
 
-        public Paper(Context context, AttributeSet attrs) {
-            super(context, attrs);
-        }
+        invalidate();
 
-        protected void onDraw(Canvas canvas) {
-            paint.setStrokeWidth(10);
-            paint.setAntiAlias(true);
-            paint.setColor(Color.BLACK);
-            paint.setStyle(Paint.Style.STROKE);
-            canvas.drawPath(path, paint);
-            paint.setDither(true);
-            paint.setStrokeWidth(60);
-            paint.setAlpha(100);
-            paint.setStyle(Paint.Style.STROKE);
-            paint.setStrokeJoin(Paint.Join.ROUND);
-            paint.setStrokeCap(Paint.Cap.ROUND);
-        }
-
-
-        @Override
-        public boolean onTouchEvent(MotionEvent event) {
-
-            x = event.getX();
-            y = event.getY();
-
-            switch(event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    Log.d("xxx", event.toString());
-                    path.moveTo(x, y);
-                    break;
-                case MotionEvent.ACTION_MOVE:
-                    Log.d("xxx", "move");
-                    x = event.getX();
-                    y = event.getY();
-                    path.lineTo(x, y);
-                    break;
-                case MotionEvent.ACTION_UP:
-                    Log.d("xxx", "up");
-                    break;
-            }
-
-            invalidate();
-
-            return true;
-        }
-
-
-
-
+        return true;
     }
 
 }

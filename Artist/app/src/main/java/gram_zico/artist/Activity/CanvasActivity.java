@@ -16,6 +16,7 @@ import android.widget.SeekBar;
 import com.larswerkman.holocolorpicker.ColorPicker;
 
 import gram_zico.artist.BaseActivity;
+import gram_zico.artist.DrawView;
 import gram_zico.artist.R;
 
 public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarChangeListener, View.OnClickListener{
@@ -24,6 +25,7 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
     FloatingActionButton clearButton, eraserButton;
     LinearLayout seekLayout;
     SeekBar seekBar;
+    DrawView drawView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
         seekLayout = (LinearLayout)findViewById(R.id.seekLayout);
         seekBar = (SeekBar)findViewById(R.id.seekBar);
         seekBar.setOnSeekBarChangeListener(this);
+
+        drawView = (DrawView)findViewById(R.id.paper);
 
         eraserButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,10 +60,9 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
     public void onClick(View view) {
         removeDot();
 
-
         RelativeLayout relativeLayout = (RelativeLayout) view;
         FloatingActionButton floatingActionButton = (FloatingActionButton)relativeLayout.getChildAt(0);
-        Log.d("xxx", "color: " + floatingActionButton.getBackgroundTintList().getDefaultColor());
+        drawView.changeColor(floatingActionButton.getBackgroundTintList().getDefaultColor());
 
         View dotView = new View(CanvasActivity.this);
         dotView.setTag("dot");
@@ -140,7 +143,7 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-        Log.d("xxx", "seek data" + i);
+        drawView.changeWidth(i);
     }
 
     @Override
