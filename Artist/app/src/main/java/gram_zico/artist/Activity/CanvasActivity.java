@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -38,18 +37,26 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
         clearButton = (FloatingActionButton)findViewById(R.id.clearButton);
         eraserButton = (FloatingActionButton)findViewById(R.id.eraserButton);
 
-        seekLayout = (LinearLayout)findViewById(R.id.seekLayout);
-        seekBar = (SeekBar)findViewById(R.id.seekBar);
-        seekBar.setOnSeekBarChangeListener(this);
-
-        drawView = (DrawView)findViewById(R.id.paper);
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawView.clear();
+            }
+        });
 
         eraserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 removeDot();
+                drawView.changeColor(Color.WHITE);
             }
         });
+
+        seekLayout = (LinearLayout)findViewById(R.id.seekLayout);
+        seekBar = (SeekBar)findViewById(R.id.seekBar);
+        seekBar.setOnSeekBarChangeListener(this);
+
+        drawView = (DrawView)findViewById(R.id.paper);
 
         addColorButton();
     }
@@ -126,8 +133,8 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
         builder.setPositiveButton("선택", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Log.d("xxx", "color data: " + colorPicker.getColor());
                 button.setBackgroundTintList(ColorStateList.valueOf(colorPicker.getColor()));
+                drawView.changeColor(colorPicker.getColor());
                 builder.create().cancel();
             }
         });

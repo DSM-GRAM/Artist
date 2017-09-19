@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -36,6 +37,12 @@ public class DrawView extends View {
         super(context, attrs);
     }
 
+    public void clear(){
+        linkedList.clear();
+        path = new Path();
+        invalidate();
+    }
+
     public void changeColor(int color){
         linkedList.add(new DrawClass(path, getPaint(paint.getColor(), paint.getStrokeWidth())));
         paint.setColor(color);
@@ -53,6 +60,9 @@ public class DrawView extends View {
         paint.setColor(color);
         paint.setStrokeWidth(width);
         paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStrokeCap(Paint.Cap.ROUND);
+
         return paint;
     }
 
@@ -61,6 +71,8 @@ public class DrawView extends View {
             paint.setStrokeWidth(10);
             paint.setColor(Color.BLACK);
             paint.setStyle(Paint.Style.STROKE);
+            paint.setStrokeJoin(Paint.Join.ROUND);
+            paint.setStrokeCap(Paint.Cap.ROUND);
             bitmap = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.ARGB_8888);
         }
 
@@ -68,6 +80,10 @@ public class DrawView extends View {
         for(DrawClass drawClass : linkedList){
             canvas.drawPath(drawClass.path, drawClass.paint);
         }
+
+        Log.d("xxx", ""+Color.WHITE);
+        Log.d("xxx", ""+paint.getColor());
+
 
         canvas.drawPath(path, paint);
     }
