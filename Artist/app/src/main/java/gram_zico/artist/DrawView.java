@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.support.annotation.Nullable;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -22,7 +24,7 @@ public class DrawView extends View {
     private LinkedList<DrawClass> linkedList = new LinkedList<>();
 
     private Paint paint = new Paint();
-    private Path path;
+    private Path path = new Path();
 
     private Bitmap bitmap;
 
@@ -30,16 +32,28 @@ public class DrawView extends View {
         super(context);
     }
 
+    public DrawView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+    }
+
     public void changeColor(int color){
-        linkedList.add(new DrawClass(path, paint));
+        linkedList.add(new DrawClass(path, getPaint(paint.getColor(), paint.getStrokeWidth())));
         paint.setColor(color);
         path = new Path();
     }
 
     public void changeWidth(int size){
-        linkedList.add(new DrawClass(path, paint));
+        linkedList.add(new DrawClass(path, getPaint(paint.getColor(), paint.getStrokeWidth())));
         paint.setStrokeWidth(size);
         path = new Path();
+    }
+
+    private Paint getPaint(int color, float width){
+        Paint paint = new Paint();
+        paint.setColor(color);
+        paint.setStrokeWidth(width);
+        paint.setStyle(Paint.Style.STROKE);
+        return paint;
     }
 
     protected void onDraw(Canvas canvas) {
@@ -50,7 +64,7 @@ public class DrawView extends View {
             bitmap = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.ARGB_8888);
         }
 
-        canvas.setBitmap(bitmap);
+        //canvas.setBitmap(bitmap);
         for(DrawClass drawClass : linkedList){
             canvas.drawPath(drawClass.path, drawClass.paint);
         }
