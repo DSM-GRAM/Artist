@@ -4,6 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.shower.artist_shower.ShowSample">
+    tools:context="com.example.shower.artist_shower.ShowSample"
+    android:padding="20dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="당신을 위한 샘플 사진입니다."
+            android:textSize="40dp"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="선택한 카테고리 : 조민규"
+            android:textSize="30dp"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="15">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="확인하셨나요?"
+            android:textSize="50dp"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="앱의 '그리기 시작' 버튼을 눌러주세요!"
+            android:textSize="30dp"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:textStyle="bold"/>
+    </LinearLayout>
 
 </LinearLayout>

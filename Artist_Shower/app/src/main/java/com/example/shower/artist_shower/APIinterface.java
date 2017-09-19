@@ -22,4 +22,8 @@ public interface APIinterface {
     @GET("/sample/{_id}")
     Call<JsonObject> getSample(@Path("id") int sample_id);
 
+//    @FormUrlEncoded
+//    @POST("/start-draw/{id}")
+//    Call<Void> get
+
 }
