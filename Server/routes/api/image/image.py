@@ -2,7 +2,9 @@
 
 from flask import request, send_from_directory
 from flask_restful import Resource
-from database.models.user_chosen_image import *
+from database.models.image_queue import *
+from database.models.device import *
+from support.fcm import push
 
 image_dirs = [
     '',
@@ -19,21 +21,36 @@ image_dirs = [
 ]
 
 
+class ChooseSample(Resource):
+    def post(self):
+        # 2. 샘플 그림 선정과 동적 URI 생성
+        category = request.form.get('category', 0, int)
+        _id = str(choose_new_sample(category))
+        push(get_devices_by_type(2), {'message': 'sample', '_id': _id})
+        return {'_id': _id}, 201
+
+
 class Sample(Resource):
-    def get(self, phone):
-        # 접속 시 샘플 그림 전송
-        category = int(request.args['category'])
-        image_num = insert_new_image(phone, category)
+    def get(self, _id):
+        # 3. 샘플 그림 get
+        category, image_num = get_image_data_by_id(_id)
         return send_from_directory(image_dirs[category], f"{image_num}.PNG")
 
 
-class Compare(Resource):
-    def post(self, phone):
-        # 유사도 측정
-        user_img = request.files['img']
+class StartDraw(Resource):
+    def post(self, _id):
+        # 4. 그리기 시작
+        push(get_devices_by_type(2), {'message': 'start'})
+        return '', 201
 
-        category, image_num = get_image_data_by_phone(phone)
+
+class Compare(Resource):
+    def post(self, _id):
+        # 5. 유사도 측정
+        user_img = request.files['img']
+        category, image_num = get_image_data_by_id(_id)
 
         origin_img = open(f'{image_dirs[category]}/{image_num}.png')
 
+        push(get_devices_by_type(2).append(get_devices_by_type(3)), {'message': 'end'})
         return '', 201

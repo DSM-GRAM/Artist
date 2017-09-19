@@ -12,21 +12,27 @@ logger = None
 
 
 def add_resources():
+    from routes.api.device.device import Device
     from routes.api.user.user import User, CategoryCount
     from routes.api.leaderboard.leaderboard import Rank, UserImage
-    from routes.api.image.image import Sample, Compare
+    from routes.api.image.image import ChooseSample, Sample, StartDraw, Compare
+
+    # device package
+    api.add_resource(Device, '/device')
 
     # user package
     api.add_resource(User, '/user')
     api.add_resource(CategoryCount, '/category-count')
 
-    # rank package
+    # leaderboard package
     api.add_resource(Rank, '/rank')
     api.add_resource(UserImage, '/user-image/<phone>')
 
     # image package
-    api.add_resource(Sample, '/sample-image/<phone>')
-    api.add_resource(Compare, '/compare/<phone>')
+    api.add_resource(ChooseSample, '/new-sample')
+    api.add_resource(Sample, '/sample/<_id>')
+    api.add_resource(StartDraw, '/start-draw/<_id>')
+    api.add_resource(Compare, '/compare/<_id>')
 
 
 @app.before_first_request
