@@ -20,7 +20,6 @@
         </activity>
 
         <activity android:name=".Activity.CategorySelectActivity"/>
-        <!--<activity android:name=".Activity.CanvasActivity"/>-->
     </application>
 
 </manifest>
