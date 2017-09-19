@@ -17,6 +17,7 @@ Drawer, Shower, Scoreboard의 3개 앱으로 나누어 부스 구성을 준비.
 
 ## Technical Stacks
 - Java
+- Firebase
 - Python & Flask
 - AWS & MongoDB
 - Image Processing
