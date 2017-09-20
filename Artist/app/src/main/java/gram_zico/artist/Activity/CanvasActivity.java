@@ -15,7 +15,7 @@ import android.widget.SeekBar;
 import com.larswerkman.holocolorpicker.ColorPicker;
 
 import gram_zico.artist.BaseActivity;
-import gram_zico.artist.DrawView;
+import gram_zico.artist.Model.DrawView;
 import gram_zico.artist.R;
 
 public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarChangeListener, View.OnClickListener{

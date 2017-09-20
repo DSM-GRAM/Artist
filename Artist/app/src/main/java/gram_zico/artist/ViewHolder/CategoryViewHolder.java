@@ -1,0 +1,40 @@
+package gram_zico.artist.ViewHolder;
+
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
+
+import gram_zico.artist.Activity.PrepareDrawActivity;
+import gram_zico.artist.R;
+
+/**
+ * Created by root1 on 2017. 9. 20..
+ */
+
+public class CategoryViewHolder extends RecyclerView.ViewHolder{
+
+    public TextView titleText, countText;
+    public View colorView;
+
+    public CategoryViewHolder(View itemView, final Context context) {
+        super(itemView);
+        titleText = setViewById(TextView.class,itemView, R.id.titleText);
+        countText = setViewById(TextView.class, itemView, R.id.countText);
+        colorView = setViewById(View.class, itemView, R.id.colorView);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PrepareDrawActivity.class);
+                intent.putExtra("title", titleText.getText().toString());
+                context.startActivity(intent);
+            }
+        });
+    }
+
+    private <T> T setViewById (Class<T> c,View view, int id){
+        return c.cast(view.findViewById(id));
+    }
+}

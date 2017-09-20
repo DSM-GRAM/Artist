@@ -26,6 +26,7 @@
             android:src="@drawable/icon_brush"/>
 
         <TextView
+            android:id="@+id/titleText"
             android:layout_below="@id/imageView"
             android:layout_marginTop="32dp"
             android:layout_width="wrap_content"
@@ -41,6 +42,7 @@
         android:layout_height="0dp"
         android:layout_weight="1">
         <Button
+            android:id="@+id/startButton"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

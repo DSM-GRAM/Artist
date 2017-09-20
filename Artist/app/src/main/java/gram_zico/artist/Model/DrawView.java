@@ -1,4 +1,4 @@
-package gram_zico.artist;
+package gram_zico.artist.Model;
 
 import android.content.Context;
 import android.graphics.Bitmap;
