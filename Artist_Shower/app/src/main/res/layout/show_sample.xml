@@ -35,10 +35,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="15">
+
         <ImageView
+            android:id="@+id/sample_img"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <LinearLayout

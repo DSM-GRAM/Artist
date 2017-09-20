@@ -13,17 +13,17 @@ import retrofit2.http.Path;
  * Created by dsm2016 on 2017-09-19.
  */
 
-public interface APIinterface {
-
-    @FormUrlEncoded
-    @POST("/new-sample")
-    Call<Void> callSample(@Field("category") int category);
-
-    @GET("/sample/{_id}")
-    Call<JsonObject> getSample(@Path("id") int sample_id);
+public interface GitHubService {
 
 //    @FormUrlEncoded
-//    @POST("/start-draw/{id}")
-//    Call<Void> get
+//    @POST("/new-sample")
+//    Call<Void> callSample(@Field("category") int category);
 
+    @GET("/sample/{_id}")
+    Call<Item> getSample(@Path("id") int sample_id);
+
+    @FormUrlEncoded
+    @POST("/start-draw/{_id}")
+    Call<Item> postStart(@Field("Message") String message);
 }
+
