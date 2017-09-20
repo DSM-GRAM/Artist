@@ -1,4 +1,4 @@
-from flask import Flask, request
+﻿from flask import Flask, request
 from flask_restful import Api
 
 import logging
@@ -62,14 +62,14 @@ def before_first_request():
 
 @app.before_request
 def before_request():
-    logger.info(f'Requested from {request.host} [ {request.method} {request.url} ]')
-    logger.info(f'Request data : {request.form}')
+    logger.info('Requested from {0} [ {1} {2} ]'.format(request.host, request.method, request.url))
+    logger.info('Request data : {0}'.format(request.form))
 
 
 @app.after_request
 def after_request(response):
     # flask.wrapper.Response 클래스의 인스턴스
-    logger.info(f'Response status : {response.status}')
+    logger.info('Response status : {0}'.format(response.status))
 
     return response
 

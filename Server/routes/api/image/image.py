@@ -34,7 +34,7 @@ class Sample(Resource):
     def get(self, _id):
         # 3. 샘플 그림 get
         category, image_num = get_image_data_by_id(_id)
-        return send_from_directory(image_dirs[category], f"{image_num}.PNG")
+        return send_from_directory(image_dirs[category], '{0}.PNG'.format(image_num))
 
 
 class StartDraw(Resource):
@@ -50,7 +50,7 @@ class Compare(Resource):
         user_img = request.files['img']
         category, image_num = get_image_data_by_id(_id)
 
-        origin_img = open(f'{image_dirs[category]}/{image_num}.png')
+        origin_img = open('{0}/{1}.png'.format(image_dirs[category], image_num))
 
         push(get_devices_by_type(2).append(get_devices_by_type(3)), {'message': 'end'})
         return '', 201

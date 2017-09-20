@@ -19,7 +19,7 @@ class User(Resource):
 
         img = request.files['img']
         # 사용자의 이미지 처리
-        img.save(f'./user_images/{phone}.png')
+        img.save('./user_images/{0}.png'.format(phone))
 
         # leaderboard 쪽으로 푸쉬 보내야 함
 
