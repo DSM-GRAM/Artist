@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.io.FileOutputStream;
 import java.util.LinkedList;
 
 
@@ -26,8 +27,9 @@ public class DrawView extends View {
 
     private Paint paint = new Paint();
     private Path path = new Path();
-
     private Bitmap bitmap;
+    private View paper;
+    private Bitmap wallpaper;
 
     public DrawView(Context context) {
         super(context);
@@ -54,6 +56,10 @@ public class DrawView extends View {
         paint.setStrokeWidth(size);
         path = new Path();
     }
+    public void SaveBitmap(){
+
+    }
+
 
     private Paint getPaint(int color, float width){
         Paint paint = new Paint();
@@ -75,8 +81,6 @@ public class DrawView extends View {
             paint.setStrokeCap(Paint.Cap.ROUND);
             bitmap = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.ARGB_8888);
         }
-
-        //canvas.setBitmap(bitmap);
         for(DrawClass drawClass : linkedList){
             canvas.drawPath(drawClass.path, drawClass.paint);
         }
@@ -86,6 +90,29 @@ public class DrawView extends View {
 
 
         canvas.drawPath(path, paint);
+    }
+    private void saveView( View view )
+    {
+        Bitmap  b = Bitmap.createBitmap( view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas( b );
+        view.draw( c );
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream( "/sdcard/some_view_image_" + System.currentTimeMillis() + ".png" );
+            if ( fos != null )
+            {
+                b.compress(Bitmap.CompressFormat.PNG, 100, fos );
+                fos.close();
+            }
+            setWallpaper( b );
+        } catch( Exception e )
+        {
+            Log.e("testSaveView", "Exception: " + e.toString() );
+        }
+    }
+
+    public void setWallpaper(Bitmap wallpaper) {
+        this.wallpaper = wallpaper;
     }
 
     class DrawClass{
