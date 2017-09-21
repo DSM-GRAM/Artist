@@ -1,3 +1,4 @@
+# -*- coding: utf8 -*-
 # 리더보드를 위한 데이터를 관리합니다
 
 from flask import send_from_directory

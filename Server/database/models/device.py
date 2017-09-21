@@ -1,7 +1,11 @@
+# -*- coding: utf8 -*-
 from database.mongodb import device_col
 
 
 def add_device(_type, registration_id):
+    device_col.remove({'registration_id': registration_id})
+    # 중복 제거
+
     device_col.insert({
         'type': _type,
         'registration_id': registration_id
