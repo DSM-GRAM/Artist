@@ -34,26 +34,24 @@ public class ShowSample extends AppCompatActivity {
 
         img_sample = (ImageView) findViewById(R.id.sample_img);
 
-//        gitHubService = retrofit.create(GitHubService.class);
-//
-//        Call<Item> call = gitHubService.getSample(1);
-//        call.enqueue(new Callback<Item>() {
-//            @Override
-//            public void onResponse(Call<Item> call, Response<Item> response) {
-//                Item item = response.body();
-//                img_sample.setImageResource(item.hashCode());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Item> call, Throwable t) {
-//
-//            }
-//        });
+        gitHubService = retrofit.create(GitHubService.class);
+
+        Call<Item> call = gitHubService.getSample(1);
+        call.enqueue(new Callback<Item>() {
+            @Override
+            public void onResponse(Call<Item> call, Response<Item> response) {
+                Log.d("Notice", "Success");
+                Item item = response.body();
+//                img_sample.setImageResource();
+            }
+
+            @Override
+            public void onFailure(Call<Item> call, Throwable t) {
+                Log.d("Notice", "Fail");
+            }
+        });
     }
 
-    public void getImage() {
-//        gitHubService = APIClient.get
-    }
 
 
 }
