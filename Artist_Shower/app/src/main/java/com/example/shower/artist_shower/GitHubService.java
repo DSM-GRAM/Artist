@@ -17,16 +17,14 @@ import retrofit2.http.Query;
 public interface GitHubService {
 
     @GET("/sample/{_id}")
-    Call<Item> getSample(@Path("id") int sample_id);
+    Call<Item> getSample(@Query("id") int sample_id);
 
     @FormUrlEncoded
     @POST("/new-sample")
-    Call<Void> callSample(@Field("category") int category);
+    Call<Item> callSample();
 
     @FormUrlEncoded
     @POST("/start-draw/{_id}")
     Call<Item> postStart(@Query("Message") String message);
-
-
 }
 

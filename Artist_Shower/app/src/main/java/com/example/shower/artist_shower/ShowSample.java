@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -36,20 +37,54 @@ public class ShowSample extends AppCompatActivity {
 
         gitHubService = retrofit.create(GitHubService.class);
 
-        Call<Item> call = gitHubService.getSample(1);
-        call.enqueue(new Callback<Item>() {
+        retrofit = new Retrofit.Builder()
+                .baseUrl("52.79.134.200:5590")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        gitHubService = retrofit.create(GitHubService.class);
+
+        // 요청 보냄
+        Call<Item> callSample = gitHubService.callSample();
+        callSample.enqueue(new Callback<Item>() {
             @Override
             public void onResponse(Call<Item> call, Response<Item> response) {
-                Log.d("Notice", "Success");
-                Item item = response.body();
-//                img_sample.setImageResource();
+                Log.d("TEST", "SUCCESS");
             }
 
             @Override
             public void onFailure(Call<Item> call, Throwable t) {
-                Log.d("Notice", "Fail");
+                Log.d("Test", "FAIL");
             }
         });
+
+        // ImageURL 받음
+        Call<Item> sample = gitHubService.getSample(1);
+        sample.enqueue(new Callback<Item>() {
+            @Override
+            public void onResponse(Call<Item> call, Response<Item> response) {
+                Log.i("Test", response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<Item> call, Throwable t) {
+                Log.d("TEST", "FAIL");
+            }
+        });
+
+        // 푸쉬 알림을 줌
+        Call<Item> pushNotice = gitHubService.postStart("Start");
+        pushNotice.enqueue(new Callback<Item>() {
+            @Override
+            public void onResponse(Call<Item> call, Response<Item> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Item> call, Throwable t) {
+
+            }
+        });
+
     }
 
 
