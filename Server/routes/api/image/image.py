@@ -1,10 +1,18 @@
+# -*- coding: utf8 -*-
 # 이미지에 대한 로직을 수행합니다. 사용자의 데이터는 일체 관리하지 않습니다.
 
 from flask import request, send_from_directory
 from flask_restful import Resource
+
 from database.models.image_queue import *
 from database.models.device import *
+
 from support.fcm import push
+from support.imgcompare import image_compare
+
+from uuid import uuid4
+import os
+
 
 image_dirs = [
     '',
@@ -48,9 +56,14 @@ class Compare(Resource):
     def post(self, _id):
         # 5. 유사도 측정
         user_img = request.files['img']
+        img_name = uuid4()
+        user_img.save('{0}.png'.format(img_name))
+        # 임시 저장
+
         category, image_num = get_image_data_by_id(_id)
 
-        origin_img = open('{0}/{1}.png'.format(image_dirs[category], image_num))
+        score = 30 + image_compare('{0}.png'.format(img_name), '{0}/{1}.png'.format(image_dirs[category], image_num)) * 0.7
+        os.remove('{0}.png'.format(img_name))
 
         push(get_devices_by_type(2).append(get_devices_by_type(3)), {'message': 'end'})
-        return '', 201
+        return score, 201
