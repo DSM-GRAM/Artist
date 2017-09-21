@@ -7,9 +7,9 @@ package gram_zico.artist.Model;
 public class CategoryModel {
     private int count;
     private String title;
-    private int color;
+    private String color;
 
-    public CategoryModel(String title, int count, int color) {
+    public CategoryModel(String title, int count, String color) {
         this.count = count;
         this.title = title;
         this.color = color;
@@ -23,7 +23,7 @@ public class CategoryModel {
         return title;
     }
 
-    public int getColor() {
+    public String getColor() {
         return color;
     }
 }

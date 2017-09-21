@@ -6,14 +6,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import java.io.FileOutputStream;
 import java.util.LinkedList;
+
+import gram_zico.artist.R;
 
 
 /**
@@ -28,8 +29,6 @@ public class DrawView extends View {
     private Paint paint = new Paint();
     private Path path = new Path();
     private Bitmap bitmap;
-    private View paper;
-    private Bitmap wallpaper;
 
     public DrawView(Context context) {
         super(context);
@@ -45,6 +44,33 @@ public class DrawView extends View {
         invalidate();
     }
 
+    public Bitmap getBitmap(){
+        Canvas tempCanvas = new Canvas();
+        tempCanvas.setBitmap(bitmap);
+
+        for(DrawClass data : linkedList){
+            tempCanvas.drawPath(data.path, data.paint);
+        }
+
+        tempCanvas.drawPath(path, paint);
+
+        return overlay();
+    }
+
+    private Bitmap overlay(){
+        BitmapDrawable bitmapDrawable = (BitmapDrawable)getResources().getDrawable(R.drawable.back_grid);
+        Bitmap backBitmap = bitmapDrawable.getBitmap();
+        Bitmap setBitmap = Bitmap.createBitmap(backBitmap.getWidth(), backBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(setBitmap);
+
+        float width = backBitmap.getWidth() - bitmap.getWidth();
+        float height = backBitmap.getHeight() - bitmap.getHeight();
+
+        canvas.drawBitmap(backBitmap, 0, 0, null);
+        canvas.drawBitmap(bitmap, width/2, height/2, null);
+        return setBitmap;
+    }
+
     public void changeColor(int color){
         linkedList.add(new DrawClass(path, getPaint(paint.getColor(), paint.getStrokeWidth())));
         paint.setColor(color);
@@ -55,9 +81,6 @@ public class DrawView extends View {
         linkedList.add(new DrawClass(path, getPaint(paint.getColor(), paint.getStrokeWidth())));
         paint.setStrokeWidth(size);
         path = new Path();
-    }
-    public void SaveBitmap(){
-
     }
 
 
@@ -79,40 +102,14 @@ public class DrawView extends View {
             paint.setStyle(Paint.Style.STROKE);
             paint.setStrokeJoin(Paint.Join.ROUND);
             paint.setStrokeCap(Paint.Cap.ROUND);
-            bitmap = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.ARGB_8888);
+            bitmap = Bitmap.createBitmap(this.getWidth(), this.getHeight(), Bitmap.Config.ARGB_8888);
         }
+
         for(DrawClass drawClass : linkedList){
             canvas.drawPath(drawClass.path, drawClass.paint);
         }
 
-        Log.d("xxx", ""+Color.WHITE);
-        Log.d("xxx", ""+paint.getColor());
-
-
         canvas.drawPath(path, paint);
-    }
-    private void saveView( View view )
-    {
-        Bitmap  b = Bitmap.createBitmap( view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas( b );
-        view.draw( c );
-        FileOutputStream fos;
-        try {
-            fos = new FileOutputStream( "/sdcard/some_view_image_" + System.currentTimeMillis() + ".png" );
-            if ( fos != null )
-            {
-                b.compress(Bitmap.CompressFormat.PNG, 100, fos );
-                fos.close();
-            }
-            setWallpaper( b );
-        } catch( Exception e )
-        {
-            Log.e("testSaveView", "Exception: " + e.toString() );
-        }
-    }
-
-    public void setWallpaper(Bitmap wallpaper) {
-        this.wallpaper = wallpaper;
     }
 
     class DrawClass{

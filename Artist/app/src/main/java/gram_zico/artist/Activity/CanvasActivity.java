@@ -1,22 +1,41 @@
 package gram_zico.artist.Activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 
+import com.google.gson.JsonObject;
 import com.larswerkman.holocolorpicker.ColorPicker;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import gram_zico.artist.BaseActivity;
+import gram_zico.artist.Connect.RetrofitClass;
 import gram_zico.artist.Model.DrawView;
 import gram_zico.artist.R;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarChangeListener, View.OnClickListener{
 
@@ -25,6 +44,8 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
     LinearLayout seekLayout;
     SeekBar seekBar;
     DrawView drawView;
+
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +79,52 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
 
         drawView = (DrawView)findViewById(R.id.paper);
 
+        Intent intent = getIntent();
+        userID = intent.getStringExtra("userID");
+
         addColorButton();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                OutputStream stream = null;
+                try {
+                    stream = new FileOutputStream("sdcard/data.png");
+                    drawView.getBitmap().compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    stream.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+                File file = new File("sdcard/data.png");
+                RequestBody requestBody = RequestBody.create(MediaType.parse("image/png"), file);
+
+                RetrofitClass.getInstance().apiInterface.uploadImage
+                        (userID, MultipartBody.Part.createFormData("img", file.getName(), requestBody)).enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                        Log.d("xxx", "" + response.code());
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+
+                goNextActivity(ImageSendActivity.class, null, null);
+            }
+        };
+
+        new Timer().schedule(timerTask, 1000 * 5 * 2);
     }
 
     RelativeLayout lastColorSelectLayout;

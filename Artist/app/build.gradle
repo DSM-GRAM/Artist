@@ -38,6 +38,8 @@ dependencies {
 
     compile 'com.larswerkman:HoloColorPicker:1.5'
 
+    compile 'gun0912.ted:tedpermission:2.0.0'
+
 
 
     testCompile 'junit:junit:4.12'

@@ -1,11 +1,15 @@
 package gram_zico.artist.Activity;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 
 import java.util.ArrayList;
 
@@ -24,6 +28,20 @@ public class TutorialActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial);
+
+        TedPermission.with(this)
+                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+                .setPermissionListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted() {
+
+                    }
+
+                    @Override
+                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+                        finish();
+                    }
+                }).check();
 
         final ViewPager viewPager = (ViewPager)findViewById(R.id.viewPager);
         final LinearLayout linearLayout = (LinearLayout)findViewById(R.id.topView);
@@ -44,7 +62,7 @@ public class TutorialActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if(((Button)view).getText().toString().equals("확인")){
-                    goNextActivity(CategorySelectActivity.class);
+                    goNextActivity(CategorySelectActivity.class, null, null);
                 }else{
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
                 }

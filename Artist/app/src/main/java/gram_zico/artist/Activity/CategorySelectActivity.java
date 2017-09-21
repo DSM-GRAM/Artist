@@ -22,6 +22,6 @@ public class CategorySelectActivity extends BaseActivity {
 
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        recyclerView.setAdapter(new CategoryAdapter(this));
+        recyclerView.setAdapter(new CategoryAdapter(this, recyclerView));
     }
 }

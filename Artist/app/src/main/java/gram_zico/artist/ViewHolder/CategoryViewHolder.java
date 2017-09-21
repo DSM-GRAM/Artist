@@ -18,7 +18,7 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder{
     public TextView titleText, countText;
     public View colorView;
 
-    public CategoryViewHolder(View itemView, final Context context) {
+    public CategoryViewHolder(View itemView, final Context context, final int count) {
         super(itemView);
         titleText = setViewById(TextView.class,itemView, R.id.titleText);
         countText = setViewById(TextView.class, itemView, R.id.countText);
@@ -29,6 +29,7 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder{
             public void onClick(View view) {
                 Intent intent = new Intent(context, PrepareDrawActivity.class);
                 intent.putExtra("title", titleText.getText().toString());
+                intent.putExtra("count", count);
                 context.startActivity(intent);
             }
         });

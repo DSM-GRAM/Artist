@@ -1,6 +1,7 @@
 package gram_zico.artist;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -9,8 +10,11 @@ import android.widget.Toast;
  */
 
 public class BaseActivity extends AppCompatActivity {
-    public void goNextActivity(Class nextClass){
+    public void goNextActivity(Class nextClass, @Nullable String title, @Nullable String data){
         Intent intent = new Intent(this, nextClass);
+        if(title != null){
+            intent.putExtra(title, data);
+        }
         startActivity(intent);
         this.finish();
     }
