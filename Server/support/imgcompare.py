@@ -7,8 +7,8 @@ def image_compare(img1_location, img2_location):
     img1 = Image.open(img1_location)
     img2 = Image.open(img2_location)
     if img1.size != img2.size:
-        return '같은 크기의 이미지 넣어주센'
-    x, y = img1.size
+        img1 = img1.resize(img2.size)
+    x, y = img2.size
 
     # RGB 오차 범위
     range1 = -10
@@ -31,3 +31,5 @@ def image_compare(img1_location, img2_location):
                 diff += 1
 
     return round(diff / (x * y) * 100, 2)
+
+print(image_compare('test1.png', 'test2.png'))
