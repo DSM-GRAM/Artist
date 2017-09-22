@@ -1,6 +1,6 @@
 package gram_zico.artist.ViewHolder;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -18,7 +18,7 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder{
     public TextView titleText, countText;
     public View colorView;
 
-    public CategoryViewHolder(View itemView, final Context context, final int count) {
+    public CategoryViewHolder(View itemView, final Activity activity, final int count) {
         super(itemView);
         titleText = setViewById(TextView.class,itemView, R.id.titleText);
         countText = setViewById(TextView.class, itemView, R.id.countText);
@@ -27,10 +27,11 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder{
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, PrepareDrawActivity.class);
+                Intent intent = new Intent(activity, PrepareDrawActivity.class);
                 intent.putExtra("title", titleText.getText().toString());
                 intent.putExtra("count", count);
-                context.startActivity(intent);
+                activity.startActivity(intent);
+                activity.finish();
             }
         });
     }

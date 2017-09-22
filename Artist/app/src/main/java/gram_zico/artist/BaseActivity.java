@@ -5,15 +5,21 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import gram_zico.artist.Model.IntentDataModel;
+
 /**
  * Created by root1 on 2017. 9. 11..
  */
 
 public class BaseActivity extends AppCompatActivity {
-    public void goNextActivity(Class nextClass, @Nullable String title, @Nullable String data){
+    public void goNextActivity(Class nextClass, @Nullable ArrayList<IntentDataModel> datas){
         Intent intent = new Intent(this, nextClass);
-        if(title != null){
-            intent.putExtra(title, data);
+        if(datas != null){
+            for(IntentDataModel data : datas){
+                intent.putExtra(data.getKey(), data.getValue());
+            }
         }
         startActivity(intent);
         this.finish();

@@ -62,7 +62,7 @@ public class TutorialActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if(((Button)view).getText().toString().equals("확인")){
-                    goNextActivity(CategorySelectActivity.class, null, null);
+                    goNextActivity(CategorySelectActivity.class, null);
                 }else{
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
                 }

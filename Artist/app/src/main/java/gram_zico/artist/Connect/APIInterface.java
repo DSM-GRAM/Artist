@@ -27,7 +27,16 @@ public interface APIInterface {
     @FormUrlEncoded
     Call<CategoryIDModel> getCategoryID(@Field("category") int categoryNum);
 
+    @POST("/start-draw/{id}")
+    Call<Void> startDraw(@Path("id")String userID);
+
     @POST("/compare/{id}")
     @Multipart
     Call<JsonObject> uploadImage(@Path("id")String id, @Part MultipartBody.Part file1);
+
+    @POST("/user")
+    @FormUrlEncoded
+    Call<Void> saveUserData(@Field("phone")String phone, @Field("name")String name,
+                            @Field("affiliation")String com, @Field("age")String age,
+                            @Field("category")int category, @Field("score")int score);
 }

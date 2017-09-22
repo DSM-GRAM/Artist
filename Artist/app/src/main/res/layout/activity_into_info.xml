@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/back_into_info"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="감사합니다"
+        android:textStyle="bold"
+        android:layout_marginTop="84dp"
+        android:layout_marginLeft="16dp"
+        android:textSize="24dp"/>
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@id/text1"
+        android:layout_marginTop="64dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:text="그림을 그리고 표시될 정보를\n입력하는 페이지입니다."/>
+
+    <LinearLayout
+        android:elevation="36dp"
+        android:layout_marginTop="64dp"
+        android:layout_below="@id/text2"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="46dp"
+        android:layout_marginRight="46dp"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/nameEdit"
+            android:textSize="14dp"
+            android:hint="이름"
+            android:background="@drawable/into_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#B1B1B1"/>
+
+        <EditText
+            android:id="@+id/phoneEdit"
+            android:textSize="14dp"
+            android:hint="전화번호"
+            android:inputType="phone"
+            android:background="@drawable/into_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#B1B1B1"/>
+
+        <EditText
+            android:id="@+id/comEdit"
+            android:textSize="14dp"
+            android:hint="소속"
+            android:background="@drawable/into_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#B1B1B1"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/ageEdit"
+                android:inputType="number"
+                android:textSize="14dp"
+                android:hint="나이"
+                android:background="@drawable/into_edittext"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/manButton"
+                android:text="남자"
+                android:background="@drawable/view_select"
+                android:layout_width="60dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/womanButton"
+                android:text="여자"
+                android:background="@drawable/view_unselect"
+                android:layout_width="60dp"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/finishButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="완료"
+        android:textSize="20dp"
+        android:layout_marginBottom="32dp"
+        android:background="@android:color/transparent"
+        android:textColor="@color/colorPurple"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

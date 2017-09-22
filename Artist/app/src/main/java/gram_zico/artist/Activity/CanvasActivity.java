@@ -23,12 +23,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import gram_zico.artist.BaseActivity;
 import gram_zico.artist.Connect.RetrofitClass;
 import gram_zico.artist.Model.DrawView;
+import gram_zico.artist.Model.IntentDataModel;
 import gram_zico.artist.R;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -46,6 +48,7 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
     DrawView drawView;
 
     private String userID;
+    private String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +84,7 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
 
         Intent intent = getIntent();
         userID = intent.getStringExtra("userID");
+        category = intent.getStringExtra("category");
 
         addColorButton();
     }
@@ -120,7 +124,10 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
                     }
                 });
 
-                goNextActivity(ImageSendActivity.class, null, null);
+                ArrayList<IntentDataModel> data = new ArrayList<>();
+                data.add(new IntentDataModel("userID", userID));
+                data.add(new IntentDataModel("category", category));
+                goNextActivity(IntoInfoActivity.class, data);
             }
         };
 
@@ -153,14 +160,13 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
         }
     }
 
-    private int colorArr[] = new int[]
-                    {Color.RED, Color.YELLOW, Color.BLUE, Color.GREEN, Color.GRAY, Color.CYAN,
-                    Color.MAGENTA, Color.rgb(255,255,0), Color.rgb(255,255,0), Color.rgb(255,255,0), Color.rgb(255,255,0), Color.rgb(255,255,0)};
+    private String colorArr[] = new String[]
+            {"#000000", "#FF0000","#FFA700","#FFF500","#1DFF00","#00FFEB","#0062FF","#9300FF","#F500FF","#211F65","#868686","#B1B1B1"};
 
     private void addColorButton(){
         for(int i=0;i<12;i++){
             FloatingActionButton floatingActionButton = new FloatingActionButton(CanvasActivity.this);
-            floatingActionButton.setBackgroundTintList(ColorStateList.valueOf(colorArr[i]));
+            floatingActionButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(colorArr[i])));
             floatingActionButton.setCompatElevation(0);
             floatingActionButton.setTag("button");
 

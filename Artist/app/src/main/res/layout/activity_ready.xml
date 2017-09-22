@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/back_ready"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/rightText"
+        android:layout_marginTop="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="2017 GRAM all right reserved"/>
+
+    <TextView
+        android:textColor="#BB000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Artist"
+        android:id="@+id/titleText"
+        android:layout_marginTop="128dp"
+        android:textStyle="bold"
+        android:textSize="36dp"
+        android:layout_below="@+id/rightText"
+        android:layout_alignStart="@+id/button" />
+
+    <TextView
+        android:textColor="#77000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="시작하기 버튼을 눌러 그림을 그려보세요!"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/titleText"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPurple"
+        android:text="시작하기"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:id="@+id/button" />
+
+
+
+</RelativeLayout>

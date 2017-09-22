@@ -35,7 +35,7 @@
         <android.support.design.widget.FloatingActionButton
             android:elevation="2dp"
             android:id="@+id/eraserButton"
-            android:src="@drawable/ic_eraser"
+            android:src="@drawable/icon_eraser"
             android:layout_toRightOf="@id/clearButton"
             android:layout_alignParentBottom="true"
             app:backgroundTint="#B1B1B1"

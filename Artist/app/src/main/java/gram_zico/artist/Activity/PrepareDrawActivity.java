@@ -8,9 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import gram_zico.artist.BaseActivity;
 import gram_zico.artist.Connect.RetrofitClass;
 import gram_zico.artist.Model.CategoryIDModel;
+import gram_zico.artist.Model.IntentDataModel;
 import gram_zico.artist.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,7 +48,22 @@ public class PrepareDrawActivity extends BaseActivity {
                 if(userID == null){
                     showToast("다시 한 번 눌러주세요");
                 }else{
-                    goNextActivity(CanvasActivity.class, "userID", userID);
+                    RetrofitClass.getInstance().apiInterface.startDraw(userID).enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if(response.code() == 201){
+                                ArrayList<IntentDataModel> data = new ArrayList<>();
+                                data.add(new IntentDataModel("userID", userID));
+                                data.add(new IntentDataModel("category", "" + count));
+                                goNextActivity(CanvasActivity.class, data);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
                 }
             }
         });

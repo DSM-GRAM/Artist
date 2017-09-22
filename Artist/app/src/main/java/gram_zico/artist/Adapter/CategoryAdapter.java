@@ -1,6 +1,6 @@
 package gram_zico.artist.Adapter;
 
-import android.content.Context;
+import android.app.Activity;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,14 +24,18 @@ import retrofit2.Response;
 
 public class CategoryAdapter extends RecyclerView.Adapter {
 
-    private Context context;
+    private Activity activity;
     private ArrayList<CategoryModel> datas = new ArrayList<>();
+
+
 
     private String titleStrArr[] = new String[]{"동물", "화가", "캘리그라피", "캐릭터", "음식", "문양", "착시현상", "기타", "인물", "풍경"};
     private String colorCode[] = new String[]{"#FF8E8E", "#B98EFF", "#ADF6FF", "#F7C080", "#A8FF9D", "#EFFF95", "#DFA3FF", "#00EAB4", "#D5D5D5", "#A9A7E5"};
 
-    public CategoryAdapter(Context context, final RecyclerView recyclerView){
-        this.context = context;
+    public CategoryAdapter(Activity activity, final RecyclerView recyclerView){
+        this.activity = activity;
+
+
         RetrofitClass.getInstance().apiInterface.getCategoryCount().enqueue(new Callback<CategoryCountModel>() {
             @Override
             public void onResponse(Call<CategoryCountModel> call, Response<CategoryCountModel> response) {
@@ -55,7 +59,7 @@ public class CategoryAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_category_card,parent,false);
-        return new CategoryViewHolder(view, context, viewType);
+        return new CategoryViewHolder(view, activity, viewType);
     }
 
     @Override
