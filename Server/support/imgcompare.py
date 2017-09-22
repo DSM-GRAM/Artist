@@ -13,11 +13,17 @@ def image_compare(img1_location, img2_location):
     # RGB 오차 범위
     range1 = -10
     range2 = 10
-    diff = 0
+    same = 0
+    white = 0
 
     # 픽셀 비교
     for i in range(x):
         for j in range(y):
+
+            if sum(img1.getpixel((i, j))) + sum(img1.getpixel((i, j))) > 1500:
+                white += 1
+                continue
+
             try:
                 temp_r1, temp_g1, temp_b1 = img1.getpixel((i, j))
             except ValueError:
@@ -28,8 +34,8 @@ def image_compare(img1_location, img2_location):
                 temp_r2, temp_g2, temp_b2, _ = img2.getpixel((i, j))
 
             if range1 < temp_r1 - temp_r2 < range2 and range1 < temp_g1 - temp_g2 < range2 and range1 < temp_b1 - temp_b2 < range2:
-                diff += 1
+                same += 1
 
-    return round(diff / (x * y) * 100, 2)
+    return round(same / ((x * y) - white) * 100, 2)
 
-print(image_compare('test1.png', 'test2.png'))
+print(image_compare('a.png', 'b.png'))
