@@ -12,7 +12,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="앞에 있는 그림을 확인하세요"
-            android:textSize="24dp"
+            android:textSize="20dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:textColor="#FFFFFF"/>

@@ -60,7 +60,7 @@ public class IntoInfoActivity extends BaseActivity implements View.OnClickListen
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if(response.code() == 201) {
-                                goNextActivity(ReadyActivity.class, null);
+                                goNextActivity(FinishActivity.class, null);
                             }
                         }
 
