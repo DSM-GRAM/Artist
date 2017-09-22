@@ -11,8 +11,8 @@ def image_compare(img1_location, img2_location):
     x, y = img2.size
 
     # RGB 오차 범위
-    range1 = -10
-    range2 = 10
+    range1 = -20
+    range2 = 20
     same = 0
     white = 0
 

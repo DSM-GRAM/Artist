@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Server.iml" filepath="$PROJECT_DIR$/.idea/Server.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/Server.iml" filepath="$PROJECT_DIR$/.idea/Server.iml" />
+      <module fileurl="file://C:\Users\dsm2017\Documents\GitHub\Artist\Server\.idea\Server.iml" filepath="C:\Users\dsm2017\Documents\GitHub\Artist\Server\.idea\Server.iml" />
     </modules>
   </component>
 </project>
