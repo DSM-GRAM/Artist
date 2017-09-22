@@ -18,4 +18,4 @@ class Rank(Resource):
 class UserImage(Resource):
     def get(self, phone):
         # 특정 사용자의 이미지 GET
-        return send_from_directory('./user_images', '{0}.png'.format(phone))
+        return send_from_directory('./user_images', '{0}.PNG'.format(phone))
