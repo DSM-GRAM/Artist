@@ -29,7 +29,7 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder{
             public void onClick(View view) {
                 Intent intent = new Intent(activity, PrepareDrawActivity.class);
                 intent.putExtra("title", titleText.getText().toString());
-                intent.putExtra("count", count);
+                intent.putExtra("count", count + 1);
                 activity.startActivity(intent);
                 activity.finish();
             }

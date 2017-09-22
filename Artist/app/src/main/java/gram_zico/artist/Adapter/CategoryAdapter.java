@@ -29,8 +29,8 @@ public class CategoryAdapter extends RecyclerView.Adapter {
 
 
 
-    private String titleStrArr[] = new String[]{"동물", "화가", "캘리그라피", "캐릭터", "음식", "문양", "착시현상", "기타", "인물", "풍경"};
-    private String colorCode[] = new String[]{"#FF8E8E", "#B98EFF", "#ADF6FF", "#F7C080", "#A8FF9D", "#EFFF95", "#DFA3FF", "#00EAB4", "#D5D5D5", "#A9A7E5"};
+    private String titleStrArr[] = new String[]{"동물", "캘리그라피", "캐릭터", "음식", "인물"};
+    private String colorCode[] = new String[]{"#FF8E8E", "#B98EFF", "#ADF6FF", "#F7C080", "#A8FF9D"};
 
     public CategoryAdapter(Activity activity, final RecyclerView recyclerView){
         this.activity = activity;
@@ -40,7 +40,7 @@ public class CategoryAdapter extends RecyclerView.Adapter {
             @Override
             public void onResponse(Call<CategoryCountModel> call, Response<CategoryCountModel> response) {
                 if(response.code() == 200){
-                    for(int i=0;i<10;i++){
+                    for(int i=0;i<5;i++){
                         datas.add(new CategoryModel(titleStrArr[i],response.body().getData(i), colorCode[i]));
                     }
 

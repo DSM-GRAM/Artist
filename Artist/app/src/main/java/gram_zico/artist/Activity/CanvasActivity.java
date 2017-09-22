@@ -8,14 +8,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 import com.larswerkman.holocolorpicker.ColorPicker;
 
 import java.io.File;
@@ -72,7 +71,7 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
             @Override
             public void onClick(View view) {
                 removeDot();
-                drawView.changeColor(Color.WHITE);
+                drawView.changeColor(Color.TRANSPARENT);
             }
         });
 
@@ -109,29 +108,29 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
 
 
                 File file = new File("sdcard/data.png");
-                RequestBody requestBody = RequestBody.create(MediaType.parse("image/png"), file);
+                final RequestBody requestBody = RequestBody.create(MediaType.parse("image/png"), file);
 
                 RetrofitClass.getInstance().apiInterface.uploadImage
-                        (userID, MultipartBody.Part.createFormData("img", file.getName(), requestBody)).enqueue(new Callback<JsonObject>() {
+                        (userID, MultipartBody.Part.createFormData("img", file.getName(), requestBody)).enqueue(new Callback<JsonElement>() {
                     @Override
-                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                        Log.d("xxx", "" + response.code());
+                    public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                        if(response.code() == 201){
+                            ArrayList<IntentDataModel> data = new ArrayList<>();
+                            data.add(new IntentDataModel("count", ""+response.body().getAsDouble()));
+                            data.add(new IntentDataModel("category", category));
+                            goNextActivity(IntoInfoActivity.class, data);
+                        }
                     }
 
                     @Override
-                    public void onFailure(Call<JsonObject> call, Throwable t) {
-                        t.printStackTrace();
+                    public void onFailure(Call<JsonElement> call, Throwable t) {
+
                     }
                 });
-
-                ArrayList<IntentDataModel> data = new ArrayList<>();
-                data.add(new IntentDataModel("userID", userID));
-                data.add(new IntentDataModel("category", category));
-                goNextActivity(IntoInfoActivity.class, data);
             }
         };
 
-        new Timer().schedule(timerTask, 1000 * 5 * 2);
+        new Timer().schedule(timerTask, 1000 * 4 * 2);
     }
 
     RelativeLayout lastColorSelectLayout;

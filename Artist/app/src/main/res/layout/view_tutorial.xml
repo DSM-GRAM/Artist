@@ -4,11 +4,13 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"/>
 
     <TextView
+        android:id="@+id/textView"
         android:text="안녕하세요 이병찬입니다"
         android:gravity="center"
         android:textSize="18dp"

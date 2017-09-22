@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="인물"
         android:textColor="#000000"
-        android:textSize="28dp"
+        android:textSize="26dp"
         android:id="@+id/titleText"
         android:layout_marginBottom="8dp"/>
     <TextView
@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="15명이 선택"
-        android:textSize="16dp"
+        android:textSize="14dp"
         android:layout_marginBottom="8dp"/>
     <View
         android:id="@+id/colorView"

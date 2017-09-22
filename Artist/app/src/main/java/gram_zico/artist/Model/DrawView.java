@@ -77,6 +77,11 @@ public class DrawView extends View {
         path = new Path();
     }
 
+    public void setEraser(){
+        linkedList.add(new DrawClass(path, getPaint(paint.getColor(), paint.getStrokeWidth())));
+        path = new Path();
+    }
+
     public void changeWidth(int size){
         linkedList.add(new DrawClass(path, getPaint(paint.getColor(), paint.getStrokeWidth())));
         paint.setStrokeWidth(size);

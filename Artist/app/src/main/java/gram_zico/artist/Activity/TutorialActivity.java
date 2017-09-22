@@ -48,11 +48,14 @@ public class TutorialActivity extends BaseActivity {
 
         final Button nextButton = (Button)findViewById(R.id.nextButton);
 
+
+
         final ArrayList<TutorialModel> datas = new ArrayList<>();
-        datas.add(new TutorialModel(0, "hello world"));
-        datas.add(new TutorialModel(0, "hello world"));
-        datas.add(new TutorialModel(0, "hello world"));
-        datas.add(new TutorialModel(0, "hello world"));
+
+        datas.add(new TutorialModel(R.drawable.scr_info1, getString(R.string.info1)));
+        datas.add(new TutorialModel(R.drawable.scr_info2, getString(R.string.info2)));
+        datas.add(new TutorialModel(R.drawable.scr_info3, getString(R.string.info3)));
+        datas.add(new TutorialModel(R.drawable.scr_info4, getString(R.string.info4)));
 
         viewPager.setAdapter(new TutorialAdapter(getSupportFragmentManager(), datas));
 

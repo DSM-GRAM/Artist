@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -55,6 +57,10 @@ class TutorialDataFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_tutorial, container, false);
+        ImageView imageView = view.findViewById(R.id.imageView);
+        TextView textView = view.findViewById(R.id.textView);
+        imageView.setImageResource(imageID);
+        textView.setText(content);
         return view;
     }
 

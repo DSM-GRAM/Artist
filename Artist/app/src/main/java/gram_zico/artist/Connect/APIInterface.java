@@ -1,6 +1,6 @@
 package gram_zico.artist.Connect;
 
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 
 import gram_zico.artist.Model.CategoryCountModel;
 import gram_zico.artist.Model.CategoryIDModel;
@@ -32,11 +32,11 @@ public interface APIInterface {
 
     @POST("/compare/{id}")
     @Multipart
-    Call<JsonObject> uploadImage(@Path("id")String id, @Part MultipartBody.Part file1);
+    Call<JsonElement> uploadImage(@Path("id")String id, @Part MultipartBody.Part file1);
 
     @POST("/user")
     @FormUrlEncoded
     Call<Void> saveUserData(@Field("phone")String phone, @Field("name")String name,
                             @Field("affiliation")String com, @Field("age")String age,
-                            @Field("category")int category, @Field("score")int score);
+                            @Field("category")String category, @Field("score")String score);
 }
