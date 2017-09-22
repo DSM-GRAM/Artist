@@ -41,7 +41,7 @@ import retrofit2.Response;
 public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarChangeListener, View.OnClickListener{
 
     LinearLayout colorSelectLayout1, colorSelectLayout2;
-    FloatingActionButton clearButton, eraserButton;
+    FloatingActionButton clearButton;
     LinearLayout seekLayout;
     SeekBar seekBar;
     DrawView drawView;
