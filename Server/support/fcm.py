@@ -5,4 +5,5 @@ fcm = FCMNotification(api_key='AAAAyTAfM2Y:APA91bHhDWYab_8mLYaPWiDl28160C8st3uxW
 
 def push(registration_ids, data):
     if registration_ids:
+        print('Push start')
         print(fcm.notify_multiple_devices(registration_ids=registration_ids, message_title=data))
