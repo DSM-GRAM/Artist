@@ -46,7 +46,7 @@ public class PrepareDrawActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if(userID == null){
-                    showToast("다시 한 번 눌러주세요");
+                    showToast("userID를 불러오지 못했습니다.\n어플을 다시 시작하세요.");
                 }else{
                     RetrofitClass.getInstance().apiInterface.startDraw(userID).enqueue(new Callback<Void>() {
                         @Override

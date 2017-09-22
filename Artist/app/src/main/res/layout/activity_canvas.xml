@@ -32,19 +32,19 @@
             android:layout_height="wrap_content"
             app:fabSize="mini" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:elevation="2dp"
-            android:id="@+id/eraserButton"
-            android:src="@drawable/icon_eraser"
-            android:layout_toRightOf="@id/clearButton"
-            android:layout_alignParentBottom="true"
-            app:backgroundTint="#B1B1B1"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginBottom="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fabSize="mini"/>
+        <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:elevation="2dp"-->
+            <!--android:id="@+id/eraserButton"-->
+            <!--android:src="@drawable/icon_eraser"-->
+            <!--android:layout_toRightOf="@id/clearButton"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--app:backgroundTint="#B1B1B1"-->
+            <!--android:layout_marginLeft="4dp"-->
+            <!--android:layout_marginRight="4dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:fabSize="mini"/>-->
 
         <LinearLayout
             android:elevation="2dp"
@@ -52,7 +52,7 @@
             android:layout_marginLeft="4dp"
             android:layout_marginBottom="8dp"
             android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@id/eraserButton"
+            android:layout_toRightOf="@id/clearButton"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:background="@drawable/seek_background_shape"

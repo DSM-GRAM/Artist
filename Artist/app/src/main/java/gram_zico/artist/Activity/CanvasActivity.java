@@ -58,7 +58,6 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
         colorSelectLayout2 = (LinearLayout)findViewById(R.id.colorSelectLayout2);
 
         clearButton = (FloatingActionButton)findViewById(R.id.clearButton);
-        eraserButton = (FloatingActionButton)findViewById(R.id.eraserButton);
 
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,13 +66,13 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
             }
         });
 
-        eraserButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                removeDot();
-                drawView.changeColor(Color.TRANSPARENT);
-            }
-        });
+//        eraserButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                removeDot();
+//                drawView.changeColor(Color.TRANSPARENT);
+//            }
+//        });
 
         seekLayout = (LinearLayout)findViewById(R.id.seekLayout);
         seekBar = (SeekBar)findViewById(R.id.seekBar);
@@ -119,12 +118,14 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
                             data.add(new IntentDataModel("count", ""+response.body().getAsDouble()));
                             data.add(new IntentDataModel("category", category));
                             goNextActivity(IntoInfoActivity.class, data);
+                        }else{
+                            showToast("데이터 전송 오류");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<JsonElement> call, Throwable t) {
-
+                        t.printStackTrace();
                     }
                 });
             }
@@ -160,7 +161,7 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
     }
 
     private String colorArr[] = new String[]
-            {"#000000", "#FF0000","#FFA700","#FFF500","#1DFF00","#00FFEB","#0062FF","#9300FF","#F500FF","#211F65","#868686","#B1B1B1"};
+            {"#000000", "#FF0000","#FFA700","#FFF500","#1DFF00","#00FFEB","#0062FF","#9300FF","#F500FF","#211F65","#868686","#FFFFFF"};
 
     private void addColorButton(){
         for(int i=0;i<12;i++){
@@ -171,7 +172,7 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(108,108);
             params.setMargins(32,0,32,0);
-            RelativeLayout relativeLayout = new RelativeLayout(CanvasActivity.this);
+            final RelativeLayout relativeLayout = new RelativeLayout(CanvasActivity.this);
             relativeLayout.addView(floatingActionButton, params);
             relativeLayout.setOnClickListener(this);
             if(i == 11){
@@ -179,6 +180,7 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
                     @Override
                     public boolean onLongClick(View view) {
                         setDialog((FloatingActionButton) view.findViewWithTag("button"));
+                        relativeLayout.callOnClick();
                         return true;
                     }
                 });

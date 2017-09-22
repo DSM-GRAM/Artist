@@ -3,7 +3,6 @@ package gram_zico.artist.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,13 +53,12 @@ public class IntoInfoActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onClick(View view) {
                 if(isNotEmpty(nameEdit) && isNotEmpty(comEdit) && isNotEmpty(ageEdit) && isNotEmpty(phoneEdit)){
-                    Log.d("xxx", getText(nameEdit) + getText(comEdit) + getText(ageEdit) + getText(phoneEdit) + category);
-
                     RetrofitClass.getInstance().apiInterface.saveUserData(getText(phoneEdit),getText(nameEdit),getText(comEdit), getText(ageEdit), category, score).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if(response.code() == 201) {
                                 goNextActivity(FinishActivity.class, null);
+                                showToast("감사합니다.");
                             }
                         }
 
@@ -69,7 +67,6 @@ public class IntoInfoActivity extends BaseActivity implements View.OnClickListen
                             t.printStackTrace();
                         }
                     });
-                    showToast("감사합니다.");
                 }else{
                     showToast("정보를 모두 다 입력하세요.");
                 }
