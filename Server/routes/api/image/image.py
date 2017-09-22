@@ -17,15 +17,10 @@ import os
 image_dirs = [
     '',
     './sample_images/animal',
-    './sample_images/artist',
     './sample_images/calligraphy',
     './sample_images/character',
     './sample_images/food',
-    './sample_images/motif',
-    './sample_images/optical_illusion',
-    './sample_images/other',
-    './sample_images/people',
-    './sample_images/scenery'
+    './sample_images/people'
 ]
 
 
@@ -34,7 +29,18 @@ class ChooseSample(Resource):
         # 2. 샘플 그림 선정과 동적 URI 생성
         category = request.form.get('category', 0, int)
         _id = str(choose_new_sample(category))
-        push(get_devices_by_type(2), {'message': 'sample', '_id': _id})
+
+        shower = get_shower(0)
+        push(shower['registration_id'], {'message': 'sample', '_id': _id})
+        # 대기 중인 shower
+
+        shower.update({
+            'status': 1
+        })
+
+        device_col.update({'registration_id': shower['registration_id']}, shower)
+        # 상태를 '샘플 그림 view'로 변경
+
         return {'_id': _id}, 201
 
 
@@ -48,7 +54,17 @@ class Sample(Resource):
 class StartDraw(Resource):
     def post(self, _id):
         # 4. 그리기 시작
-        push(get_devices_by_type(2), {'message': 'start'})
+        shower = get_shower(1)
+        push(shower['registration_id'], {'message': 'start'})
+        # 샘플 이미지 view중인 shower
+
+        shower.update({
+            'status': 0
+        })
+
+        device_col.update({'registration_id': shower['registration_id']}, shower)
+        # 상태를 '샘플 그림 view'로 변경
+
         return '', 201
 
 
