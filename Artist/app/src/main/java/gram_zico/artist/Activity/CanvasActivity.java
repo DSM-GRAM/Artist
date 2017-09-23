@@ -131,7 +131,7 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
             }
         };
 
-        new Timer().schedule(timerTask, 1000 * 4 * 2);
+        new Timer().schedule(timerTask, 1000 * 60);
     }
 
     RelativeLayout lastColorSelectLayout;
