@@ -12,6 +12,7 @@ from support.imgcompare import image_compare
 
 from uuid import uuid4
 import os
+import random
 
 
 image_dirs = [
@@ -78,7 +79,7 @@ class Compare(Resource):
 
         category, image_num = get_image_data_by_id(_id)
 
-        score = 10 + image_compare('{0}.png'.format(img_name), '{0}/{1}.png'.format(image_dirs[category], image_num)) * 0.85
+        score = 5000 + image_compare('{0}.png'.format(img_name), '{0}/{1}.png'.format(image_dirs[category], image_num)) * 950 * 0.65 + random.randrange(1, 30001)
         os.remove('{0}.png'.format(img_name))
 
         push(get_devices_by_type(2).append(get_devices_by_type(3)), {'message': 'end'})
