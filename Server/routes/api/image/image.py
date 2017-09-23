@@ -52,6 +52,7 @@ class Sample(Resource):
     def get(self, _id):
         # 3. 샘플 그림 get
         category, image_num = get_image_data_by_id(_id)
+
         return send_from_directory(image_dirs[category], '{0}.png'.format(image_num))
 
 
@@ -89,4 +90,5 @@ class Compare(Resource):
         os.remove('{0}.png'.format(img_name))
 
         push(get_devices_by_type(2).append(get_devices_by_type(3)), {'message': 'end'})
+
         return score, 201
