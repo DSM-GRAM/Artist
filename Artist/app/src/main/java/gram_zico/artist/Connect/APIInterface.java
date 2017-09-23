@@ -36,7 +36,8 @@ public interface APIInterface {
 
     @POST("/user")
     @FormUrlEncoded
+    @Multipart
     Call<Void> saveUserData(@Field("phone")String phone, @Field("name")String name,
                             @Field("affiliation")String com, @Field("age")String age,
-                            @Field("category")String category, @Field("score")String score);
+                            @Field("category")String category, @Field("score")String score, @Part MultipartBody.Part img);
 }

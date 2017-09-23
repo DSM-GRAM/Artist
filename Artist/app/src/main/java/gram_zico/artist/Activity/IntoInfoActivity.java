@@ -7,9 +7,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.File;
+
 import gram_zico.artist.BaseActivity;
 import gram_zico.artist.Connect.RetrofitClass;
 import gram_zico.artist.R;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -49,11 +54,16 @@ public class IntoInfoActivity extends BaseActivity implements View.OnClickListen
         phoneEdit = (EditText)findViewById(R.id.phoneEdit);
 
         finishButton = (Button)findViewById(R.id.finishButton);
+
+        final File file = new File("sdcard/data.png");
+        final RequestBody requestBody = RequestBody.create(MediaType.parse("image/png"), file);
+
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(isNotEmpty(nameEdit) && isNotEmpty(comEdit) && isNotEmpty(ageEdit) && isNotEmpty(phoneEdit)){
-                    RetrofitClass.getInstance().apiInterface.saveUserData(getText(phoneEdit),getText(nameEdit),getText(comEdit), getText(ageEdit), category, score).enqueue(new Callback<Void>() {
+                    RetrofitClass.getInstance().apiInterface.saveUserData(getText(phoneEdit),getText(nameEdit),getText(comEdit), getText(ageEdit), category, score,
+                            MultipartBody.Part.createFormData("img", file.getName(), requestBody)).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if(response.code() == 201) {
