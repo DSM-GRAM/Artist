@@ -1,3 +1,4 @@
+# -*- coding: utf8 -*-
 # 디바이스에 대한 데이터를 관리합니다.
 
 from flask import request

@@ -1,3 +1,4 @@
+# -*- coding: utf8 -*-
 # 리더보드를 위한 데이터를 관리합니다
 
 from flask import send_from_directory
@@ -17,4 +18,4 @@ class Rank(Resource):
 class UserImage(Resource):
     def get(self, phone):
         # 특정 사용자의 이미지 GET
-        return send_from_directory('./user_images', f"{phone}.png")
+        return send_from_directory('./user_images', '{0}.png'.format(phone))

@@ -6,7 +6,7 @@ import random
 def choose_new_sample(category):
     return image_queue_col.insert({
         'category': category,
-        'image_num': random.randrange(1, 21)
+        'image_num': random.randrange(1, 13)
     })
 
 
