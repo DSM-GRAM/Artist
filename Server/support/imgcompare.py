@@ -1,22 +1,18 @@
-﻿# -*- coding: utf8 -*-
-from PIL import Image
+﻿from PIL import Image
 
 
 def image_compare(img1_location, img2_location):
-    # 사진 불러오기
     img1 = Image.open(img1_location)
     img2 = Image.open(img2_location)
     if img1.size != img2.size:
         img1 = img1.resize(img2.size)
     x, y = img2.size
 
-    # RGB 오차 범위
-    range1 = -20
-    range2 = 20
+    range1 = -30
+    range2 = 30
     same = 0
     white = 0
 
-    # 픽셀 비교
     for i in range(x):
         for j in range(y):
 
