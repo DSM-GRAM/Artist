@@ -16,7 +16,7 @@ def add_resources():
     from routes.api.user.user import User, CategoryCount
     from routes.api.leaderboard.leaderboard import Rank, UserImage
     from routes.api.image.image import ChooseSample, Sample, StartDraw, Compare
-    from routes.api.developer.dev import ChangeScore
+    from routes.api.developer.dev import ChangeScore, DeleteScore, InitializeDevices
 
     # device package
     api.add_resource(Device, '/device')
@@ -37,6 +37,8 @@ def add_resources():
 
     # developer package
     api.add_resource(ChangeScore, '/change-score')
+    api.add_resource(DeleteScore, '/delete-score')
+    api.add_resource(InitializeDevices, '/initialize-devices')
 
 
 @app.before_first_request

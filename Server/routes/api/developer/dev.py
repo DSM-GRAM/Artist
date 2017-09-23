@@ -1,7 +1,7 @@
 from flask import request
 from flask_restful import Resource
 
-from database.mongodb import user_col
+from database.mongodb import user_col, device_col
 
 
 class ChangeScore(Resource):
@@ -18,3 +18,18 @@ class ChangeScore(Resource):
         user_col.update({'name': name, 'score': score}, data)
 
         return '', 201
+
+
+class DeleteScore(Resource):
+    def post(self):
+        name = '"' + request.form.get('name') + '"'
+        score = request.form.get('score', type=float)
+
+        user_col.remove({'name': name, 'score': score})
+
+        return '', 201
+
+
+class InitializeDevices(Resource):
+    def post(self):
+        device_col.remove()
