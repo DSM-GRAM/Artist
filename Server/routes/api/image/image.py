@@ -32,41 +32,47 @@ class ChooseSample(Resource):
         _id = str(choose_new_sample(category))
 
         shower = get_shower(0)
-        push(shower['registration_id'], {'message': 'sample', '_id': _id})
-        # 대기 중인 shower
+        if shower:
+            push(shower['registration_id'], {'message': 'sample', '_id': _id})
+            # 대기 중인 shower
 
-        shower.update({
-            'status': 1
-        })
+            shower.update({
+                'status': 1
+            })
 
-        device_col.update({'registration_id': shower['registration_id']}, shower)
-        # 상태를 '샘플 그림 view'로 변경
+            device_col.update({'registration_id': shower['registration_id']}, shower)
+            # 상태를 '샘플 그림 view'로 변경
 
-        return {'_id': _id}, 201
+            return {'_id': _id}, 201
+        else:
+            return '', 204
 
 
 class Sample(Resource):
     def get(self, _id):
         # 3. 샘플 그림 get
         category, image_num = get_image_data_by_id(_id)
-        return send_from_directory(image_dirs[category], '{0}.PNG'.format(image_num))
+        return send_from_directory(image_dirs[category], '{0}.png'.format(image_num))
 
 
 class StartDraw(Resource):
     def post(self, _id):
         # 4. 그리기 시작
         shower = get_shower(1)
-        push(shower['registration_id'], {'message': 'start'})
-        # 샘플 이미지 view중인 shower
+        if shower:
+            push(shower['registration_id'], {'message': 'start'})
+            # 샘플 이미지 view중인 shower
 
-        shower.update({
-            'status': 0
-        })
+            shower.update({
+                'status': 0
+            })
 
-        device_col.update({'registration_id': shower['registration_id']}, shower)
-        # 상태를 '샘플 그림 view'로 변경
+            device_col.update({'registration_id': shower['registration_id']}, shower)
+            # 상태를 '샘플 그림 view'로 변경
 
-        return '', 201
+            return '', 201
+        else:
+            return '', 204
 
 
 class Compare(Resource):
