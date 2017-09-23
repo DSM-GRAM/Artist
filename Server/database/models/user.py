@@ -9,7 +9,7 @@ def add_new_score(phone, name, affiliation, age, category, score):
         'affiliation': affiliation,
         'age': int(age),
         'category': int(category),
-        'score': int(score)
+        'score': float(score)
     }
 
     if user_col.find({'phone': phone}).count():
@@ -19,7 +19,12 @@ def add_new_score(phone, name, affiliation, age, category, score):
 
 
 def get_user_data_list():
-    return list(user_col.find({}, {'_id': False}).sort('score', pymongo.DESCENDING))
+    datas = list(user_col.find({}, {'_id': False}).sort('score', pymongo.DESCENDING))
+    for idx in range(len(datas)):
+        datas[idx]['name'] = datas[idx]['name'][1:-1]
+        datas[idx]['affiliation'] = datas[idx]['affiliation'][1:-1]
+
+    return datas
 
 
 def get_category_counts():
