@@ -23,7 +23,6 @@
         <activity android:name=".Activity.CategorySelectActivity"/>
         <activity android:name=".Activity.PrepareDrawActivity"/>
         <activity android:name=".Activity.CanvasActivity"/>
-        <activity android:name=".Activity.FinishActivity"/>
 
     </application>
 

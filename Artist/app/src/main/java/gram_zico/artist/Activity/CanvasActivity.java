@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -114,8 +115,9 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
                     @Override
                     public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
                         if(response.code() == 201){
+                            Log.d("xxx", response.body().getAsDouble()+"");
                             ArrayList<IntentDataModel> data = new ArrayList<>();
-                            data.add(new IntentDataModel("count", ""+response.body().getAsDouble()));
+                            data.add(new IntentDataModel("score", ""+response.body().getAsDouble()));
                             data.add(new IntentDataModel("category", category));
                             goNextActivity(IntoInfoActivity.class, data);
                         }else{
@@ -131,7 +133,7 @@ public class CanvasActivity extends BaseActivity implements SeekBar.OnSeekBarCha
             }
         };
 
-        new Timer().schedule(timerTask, 1000 * 60 * 2);
+        new Timer().schedule(timerTask, 1000 * 60  * 2);
     }
 
     RelativeLayout lastColorSelectLayout;

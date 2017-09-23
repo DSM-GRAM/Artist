@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import gram_zico.artist.Model.CategoryCountModel;
 import gram_zico.artist.Model.CategoryIDModel;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -35,9 +36,8 @@ public interface APIInterface {
     Call<JsonElement> uploadImage(@Path("id")String id, @Part MultipartBody.Part file1);
 
     @POST("/user")
-    @FormUrlEncoded
     @Multipart
-    Call<Void> saveUserData(@Field("phone")String phone, @Field("name")String name,
-                            @Field("affiliation")String com, @Field("age")String age,
-                            @Field("category")String category, @Field("score")String score, @Part MultipartBody.Part img);
+    Call<Void> saveUserData(@Part("phone")RequestBody phone, @Part("name")RequestBody name,
+                            @Part("affiliation")RequestBody com, @Part("age")RequestBody age,
+                            @Part("category")RequestBody category, @Part("score")RequestBody score, @Part MultipartBody.Part img);
 }

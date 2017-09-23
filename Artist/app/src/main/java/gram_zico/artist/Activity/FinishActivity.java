@@ -19,11 +19,10 @@ public class FinishActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish);
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                goNextActivity(ReadyActivity.class, null);
-            }
-        }, 1000 * 3);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

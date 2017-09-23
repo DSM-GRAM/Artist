@@ -3,6 +3,7 @@ package gram_zico.artist.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,12 +63,12 @@ public class IntoInfoActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onClick(View view) {
                 if(isNotEmpty(nameEdit) && isNotEmpty(comEdit) && isNotEmpty(ageEdit) && isNotEmpty(phoneEdit)){
-                    RetrofitClass.getInstance().apiInterface.saveUserData(getText(phoneEdit),getText(nameEdit),getText(comEdit), getText(ageEdit), category, score,
+                    RetrofitClass.getInstance().apiInterface.saveUserData(getData(phoneEdit),getData(nameEdit),getData(comEdit), getData(ageEdit), getData(category), getData(score),
                             MultipartBody.Part.createFormData("img", file.getName(), requestBody)).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if(response.code() == 201) {
-                                goNextActivity(FinishActivity.class, null);
+                                goNextActivity(ReadyActivity.class, null);
                                 showToast("감사합니다.");
                             }
                         }
@@ -92,6 +93,14 @@ public class IntoInfoActivity extends BaseActivity implements View.OnClickListen
         return editText.getText().toString();
     }
 
+    private RequestBody getData(EditText editText){
+        return RequestBody.create(MediaType.parse("text/plane"), editText.getText().toString());
+    }
+
+    private RequestBody getData(String st){
+        Log.d("xxx", "getData: " + st);
+        return RequestBody.create(MediaType.parse("text/plane"), st);
+    }
     @Override
     public void onClick(View view) {
         view.setBackgroundResource(R.drawable.view_select);
