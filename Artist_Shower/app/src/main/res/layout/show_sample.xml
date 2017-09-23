@@ -15,20 +15,13 @@
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="당신을 위한 샘플 사진입니다."
-            android:textSize="40dp"
+            android:textSize="26dp"
             android:textAlignment="center"
             android:layout_weight="1"
             android:textStyle="bold"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="선택한 카테고리 : 조민규"
-            android:textSize="30dp"
-            android:textAlignment="center"
-            android:layout_weight="1"
-            />
+
     </LinearLayout>
 
     <LinearLayout
@@ -51,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="확인하셨나요?"
-            android:textSize="50dp"
+            android:textSize="40dp"
             android:textAlignment="center"
             android:layout_weight="1"
             />
@@ -59,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="앱의 '그리기 시작' 버튼을 눌러주세요!"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:textAlignment="center"
             android:layout_weight="1"
             android:textStyle="bold"/>

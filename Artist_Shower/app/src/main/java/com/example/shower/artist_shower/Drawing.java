@@ -31,13 +31,13 @@ public class Drawing extends AppCompatActivity {
 
         mProgressBar=(ProgressBar)findViewById(R.id.pbId);
         mProgressBar.setProgress(i);
-        mCountDownTimer=new CountDownTimer(120000,1000) {
+        mCountDownTimer=new CountDownTimer(60000,1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
                 Log.v("Log_tag", "Tick of Progress"+ i+ millisUntilFinished);
                 i++;
-                mProgressBar.setProgress((int)i*100/(120000/1000));
+                mProgressBar.setProgress((int)i*100/(60000/1000));
 
             }
 
@@ -46,6 +46,7 @@ public class Drawing extends AppCompatActivity {
                 //Do what you want
                 i++;
                 mProgressBar.setProgress(100);
+                startActivity(new Intent(getApplicationContext(), Wait.class));
             }
         };
         mCountDownTimer.start();
