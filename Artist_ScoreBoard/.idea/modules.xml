@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Artist_ScoreBoard.iml" filepath="$PROJECT_DIR$/Artist_ScoreBoard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Artist_ScoreBoard.iml" filepath="$PROJECT_DIR$/Artist_ScoreBoard.iml" />
       <module fileurl="file://$PROJECT_DIR$/ScoreBoard.iml" filepath="$PROJECT_DIR$/ScoreBoard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

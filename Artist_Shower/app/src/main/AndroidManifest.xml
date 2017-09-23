@@ -10,10 +10,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ShowSample">
-
-        </activity>
-
         <activity android:name=".Wait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Drawing"></activity>
+
+        <activity android:name=".ShowSample">
+
+        </activity>
+        <activity android:name=".Drawing">
+
+        </activity>
 
         <service android:name=".FirebaseManager">
             <intent-filter>

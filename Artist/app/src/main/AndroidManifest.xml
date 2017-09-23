@@ -19,7 +19,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Activity.TutorialActivity"/>
         <activity android:name=".Activity.IntoInfoActivity"/>
         <activity android:name=".Activity.CategorySelectActivity"/>
         <activity android:name=".Activity.PrepareDrawActivity"/>

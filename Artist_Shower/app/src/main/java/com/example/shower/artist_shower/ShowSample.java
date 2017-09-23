@@ -1,10 +1,12 @@
 package com.example.shower.artist_shower;
 
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -26,7 +28,7 @@ public class ShowSample extends AppCompatActivity {
 
     private ImageView img_sample;
     private Retrofit retrofit;
-    private GitHubService gitHubService;
+    private APIinterface apIinterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,59 +36,27 @@ public class ShowSample extends AppCompatActivity {
         setContentView(R.layout.show_sample);
 
         img_sample = (ImageView) findViewById(R.id.sample_img);
-
-        gitHubService = retrofit.create(GitHubService.class);
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl("52.79.134.200:5590")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        gitHubService = retrofit.create(GitHubService.class);
-
-        // 요청 보냄
-        Call<Item> callSample = gitHubService.callSample();
-        callSample.enqueue(new Callback<Item>() {
-            @Override
-            public void onResponse(Call<Item> call, Response<Item> response) {
-                Log.d("TEST", "SUCCESS");
-            }
-
-            @Override
-            public void onFailure(Call<Item> call, Throwable t) {
-                Log.d("Test", "FAIL");
-            }
-        });
+        Log.d("test", "http://52.79.134.200/sample/" + FirebaseInstanceId.getInstance().getToken());
+        Glide.with(getApplicationContext()).load("http://52.79.134.200/sample/" + FirebaseInstanceId.getInstance().getToken());
 
         // ImageURL 받음
-        Call<Item> sample = gitHubService.getSample(1);
+        Call<Item> sample = apIinterface.getSample(FirebaseInstanceId.getInstance().getToken());
         sample.enqueue(new Callback<Item>() {
             @Override
             public void onResponse(Call<Item> call, Response<Item> response) {
-                Log.i("Test", response.body().toString());
+                if(response.code() == 200)  {
+                    Log.i("Test", "success");
+                    Item item = response.body();
+                    Glide.with(getApplicationContext())
+                            .load(item.getSample_id())
+                            .into(img_sample);
+                }
             }
 
             @Override
             public void onFailure(Call<Item> call, Throwable t) {
-                Log.d("TEST", "FAIL");
+                t.printStackTrace();
             }
         });
-
-        // 푸쉬 알림을 줌
-        Call<Item> pushNotice = gitHubService.postStart("Start");
-        pushNotice.enqueue(new Callback<Item>() {
-            @Override
-            public void onResponse(Call<Item> call, Response<Item> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<Item> call, Throwable t) {
-
-            }
-        });
-
     }
-
-
-
 }
