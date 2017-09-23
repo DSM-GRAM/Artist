@@ -1,5 +1,7 @@
 package com.example.shower.artist_shower;
 
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,28 +37,32 @@ public class ShowSample extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_sample);
 
+        img_sample = (ImageView)findViewById(R.id.sample_img);
+        Intent intent = getIntent();
+        String _id = intent.getStringExtra("_id");
+        Log.d("asdsd", _id+"");
+        apIinterface = APIClient.getClient().create(APIinterface.class);
+
         img_sample = (ImageView) findViewById(R.id.sample_img);
-        Log.d("test", "http://52.79.134.200/sample/" + FirebaseInstanceId.getInstance().getToken());
-        Glide.with(getApplicationContext()).load("http://52.79.134.200/sample/" + FirebaseInstanceId.getInstance().getToken());
-
-        // ImageURL 받음
-        Call<Item> sample = apIinterface.getSample(FirebaseInstanceId.getInstance().getToken());
-        sample.enqueue(new Callback<Item>() {
-            @Override
-            public void onResponse(Call<Item> call, Response<Item> response) {
-                if(response.code() == 200)  {
-                    Log.i("Test", "success");
-                    Item item = response.body();
-                    Glide.with(getApplicationContext())
-                            .load(item.getSample_id())
-                            .into(img_sample);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Item> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+        Glide.with(getApplicationContext()).load("http://52.79.134.200:5590/sample/" + _id).into(img_sample);
     }
+//        Call<Item> sample = apIinterface.getSample(_id);
+//        sample.enqueue(new Callback<Item>() {
+//            @Override
+//            public void onResponse(Call<Item> call, Response<Item> response) {
+//                if(response.code() == 200)  {
+//                    Log.i("Test", "success");
+//                    Item item = response.body();
+//                    Glide.with(getApplicationContext())
+//                            .load(item.getSample_id())
+//                            .into(img_sample);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Item> call, Throwable t) {
+//                t.printStackTrace();
+//            }
+//        });
+//    }
 }

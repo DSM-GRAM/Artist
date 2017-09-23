@@ -11,6 +11,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 import static android.R.attr.type;
 
@@ -21,8 +22,8 @@ import static android.R.attr.type;
 
 public interface APIinterface {
 
-    @GET("/sample")
-    Call<Item> getSample(@Query("id") String sample_id);
+    @GET("/sample/{_id}")
+    Call<Item> getSample(@Url String url);
 
     @FormUrlEncoded
     @POST("/start-draw/{_id}")
@@ -33,8 +34,7 @@ public interface APIinterface {
 
     @FormUrlEncoded
     @POST("/device")
-    Call<Void>registDevice(@Field("registration_id")
-                                   String registration_id,
-                                   int type_num);
+    Call<Void>registDevice(@Field("registration_id") String registration_id,
+                           @Field("type") int type_num);
 }
 

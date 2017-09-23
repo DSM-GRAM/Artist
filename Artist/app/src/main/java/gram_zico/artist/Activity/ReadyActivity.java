@@ -1,5 +1,6 @@
 package gram_zico.artist.Activity;
 
+import android.icu.util.ULocale;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -23,7 +24,7 @@ public class ReadyActivity extends BaseActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goNextActivity(TutorialActivity.class, null);
+                goNextActivity(CategorySelectActivity.class, null);
             }
         });
     }

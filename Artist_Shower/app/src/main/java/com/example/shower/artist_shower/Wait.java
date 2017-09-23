@@ -1,5 +1,6 @@
 package com.example.shower.artist_shower;
 
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,6 +39,18 @@ public class Wait extends AppCompatActivity {
 //        mRecyclerView.setAdapter(myAdapter);
 
         apIinterface = APIClient.getClient().create(APIinterface.class);
+
+        apIinterface.registDevice(FirebaseInstanceId.getInstance().getToken(), 2).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
 
 
         apIinterface.getRank().enqueue(new Callback<JsonArray>() {
